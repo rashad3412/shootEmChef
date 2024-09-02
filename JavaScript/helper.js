@@ -25,7 +25,7 @@ function setUpGame() {
       startButton.addEventListener("click", function () {
         startButton.parentElement.style.display = "none";
         gameContainer.style.display = "block";
-        addCirclesToPage("game-circles", 10);
+        addCirclesToPage("game-circles", 13);
         moveCirclesDown();
       });
     } else {
@@ -47,7 +47,7 @@ function resetGame() {
     window.circleIntervals.forEach((interval) => clearInterval(interval));
     window.circleIntervals = [];
 
-    addCirclesToPage("game-circles", 10);
+    addCirclesToPage("game-circles", 13);
     moveCirclesDown();
   });
 }

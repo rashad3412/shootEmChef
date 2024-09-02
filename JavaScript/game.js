@@ -1,5 +1,12 @@
 /* Game Javascript File */
 
+document.addEventListener("DOMContentLoaded", () => {
+  if (!sessionStorage.getItem("navigated")) {
+    window.location.href = "index.html";
+  }
+  sessionStorage.removeItem("navigated");
+});
+
 window.circleIntervals = [];
 
 function moveCirclesDown() {
