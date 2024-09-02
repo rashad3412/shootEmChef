@@ -9,14 +9,32 @@ body {
   background-color: #187b91;
 }
 
-#start-game-button {
+#start-game-button-section {
   display: flex;
   justify-content: center;
   position: relative;
   top: 18vh;
 }
 
-#game-button {
+#start-game-button {
+  font-family: "Margarine", sans-serif;
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  font-size: 2em;
+  background-color: #76e46c;
+  border: #fff;
+  color: #fff;
+}
+
+#play-again-button-section {
+  display: none;
+  justify-content: center;
+  position: relative;
+  top: 18vh;
+}
+
+#play-again-button {
   font-family: "Margarine", sans-serif;
   width: 200px;
   height: 200px;

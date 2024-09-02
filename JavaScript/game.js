@@ -1,17 +1,32 @@
 /* Game Javascript File */
 
-document.addEventListener("DOMContentLoaded", () => {
-  const startButton = document.getElementById("game-button");
-  const gameContainer = document.getElementById("game-container");
+window.circleIntervals = [];
 
-  if (startButton) {
-    startButton.addEventListener("click", function () {
-      startButton.parentElement.style.display = "none";
-      gameContainer.style.display = "block";
-      addCirclesToPage("game-circles", 10);
-      moveCirclesDown();
-    });
-  } else {
-    console.log("not working");
-  }
-});
+function moveCirclesDown() {
+  // controlling the movement of the circles going down
+  const circles = document.querySelectorAll(".circle");
+  let playAgainShown = false;
+
+  circles.forEach((circle, index) => {
+    let position = 0;
+
+    const speed = Math.random() * 2 + 1;
+    const interval = setInterval(() => {
+      if (position >= window.innerHeight) {
+        clearInterval(interval);
+        if (!playAgainShown) {
+          window.circleIntervals.forEach((interval) => clearInterval(interval));
+          window.circleIntervals = [];
+
+          playAgainSection.style.display = "flex";
+          playAgainShown = true;
+        }
+      } else {
+        position += speed;
+        circle.style.transform = `translateY(${position}px)`;
+      }
+    }, 30);
+
+    window.circleIntervals.push(interval);
+  });
+}

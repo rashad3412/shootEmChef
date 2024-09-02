@@ -1,8 +1,10 @@
 /* This is a helper function for the game Im using this to add circles dynamically to the dom in two different Javascript files. */
 
 function addCirclesToPage(elementId, add) {
+  // Adding the circle elements to the page
   const element = document.getElementById(elementId);
   if (element) {
+    element.innerHTML = "";
     for (let i = 0; i < add; i++) {
       let createCircle = document.createElement("div");
       createCircle.classList.add("circle");
@@ -13,17 +15,42 @@ function addCirclesToPage(elementId, add) {
   }
 }
 
-function moveCirclesDown() {
-  const circles = document.querySelectorAll(".circle");
-  circles.forEach((circle, index) => {
-    let position = 0;
-    const interval = setInterval(() => {
-      if (position >= window.innerHeight) {
-        clearInterval(interval);
-      } else {
-        position += 2;
-        circle.style.transform = `translateY(${position}px)`;
-      }
-    }, 30);
+function setUpGame() {
+  // start button of the game when it is clicked
+  const startButton = document.getElementById("start-game-button");
+  const gameContainer = document.getElementById("game-container");
+
+  document.addEventListener("DOMContentLoaded", () => {
+    if (startButton) {
+      startButton.addEventListener("click", function () {
+        startButton.parentElement.style.display = "none";
+        gameContainer.style.display = "block";
+        addCirclesToPage("game-circles", 10);
+        moveCirclesDown();
+      });
+    } else {
+      console.log("not working");
+    }
   });
 }
+
+const playAgain = document.getElementById("play-again-button");
+const playAgainSection = document.getElementById("play-again-button-section");
+const score = document.getElementById("score");
+
+function resetGame() {
+  // reset button for the game
+  playAgain.addEventListener("click", () => {
+    playAgainSection.style.display = "none";
+    score.textContent = "0";
+
+    window.circleIntervals.forEach((interval) => clearInterval(interval));
+    window.circleIntervals = [];
+
+    addCirclesToPage("game-circles", 10);
+    moveCirclesDown();
+  });
+}
+
+setUpGame();
+resetGame();
