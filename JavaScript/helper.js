@@ -1,20 +1,5 @@
 /* This is a helper function for the game Im using this to add circles dynamically to the dom in two different Javascript files. */
 
-function addCirclesToPage(elementId, add) {
-  // Adding the circle elements to the page
-  const element = document.getElementById(elementId);
-  if (element) {
-    element.innerHTML = "";
-    for (let i = 0; i < add; i++) {
-      let createCircle = document.createElement("div");
-      createCircle.classList.add("circle");
-      element.append(createCircle);
-    }
-  } else {
-    console.error(`Element with ID ${elementId} not found.`);
-  }
-}
-
 function setUpGame() {
   // start button of the game when it is clicked
   const startButton = document.getElementById("start-game-button");
@@ -26,12 +11,28 @@ function setUpGame() {
         startButton.parentElement.style.display = "none";
         gameContainer.style.display = "block";
         addCirclesToPage("game-circles", 13);
-        moveCirclesDown();
+        // moveCirclesDown();
       });
     } else {
       console.log("not working");
     }
   });
+}
+
+function addCirclesToPage(elementId, add) {
+  // Adding the circle elements to the page
+  // For the game it will start at the top of the screen
+  const element = document.getElementById(elementId);
+  if (element) {
+    element.innerHTML = "";
+    for (let i = 0; i < add; i++) {
+      let createCircle = document.createElement("div");
+      createCircle.classList.add("circle");
+      element.append(createCircle);
+    }
+  } else {
+    console.error(`Element with ID ${elementId} not found.`);
+  }
 }
 
 const playAgain = document.getElementById("play-again-button");
@@ -48,7 +49,7 @@ function resetGame() {
     window.circleIntervals = [];
 
     addCirclesToPage("game-circles", 13);
-    moveCirclesDown();
+    // moveCirclesDown();
   });
 }
 

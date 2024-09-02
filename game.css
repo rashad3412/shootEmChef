@@ -83,3 +83,28 @@ body {
   margin: 2px;
   transition: transform 0.1s linear;
 }
+
+#bottom-circle {
+  position: absolute;
+  bottom: 10px;
+  top: 94%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  border: solid black 2px;
+  border-radius: 50%;
+  background-color: #76e46c;
+  margin: 2px;
+  animation: sideToSide 2s ease-in-out infinite;
+}
+
+@keyframes sideToSide {
+  0%,
+  100% {
+    transform: translateX(-50%) translateX(-10px);
+  }
+  50% {
+    transform: translateX(-50%) translateX(10px);
+  }
+}
