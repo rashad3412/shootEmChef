@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Styling for New Game Screen */
+body {
+  background-color: #187b91;
+}
+
+/* Game Title Styling on first page */
+.game-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+  margin-top: 5%;
+  font-family: "Margarine", sans-serif;
+  font-weight: 500;
+  color: #fff;
+  font-size: 1.4em;
+  letter-spacing: 0.5em;
+}
+
+.game-title :nth-child(1) {
+  position: relative;
+  right: 22%;
+}
+.game-title :nth-child(2) {
+  position: relative;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+.game-title :nth-child(3) {
+  position: relative;
+  left: 25%;
+}
+/* Game Button Styling on First Page */
+a {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 74%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  font-size: 1.7em;
+  border-radius: 5px;
+  font-family: "Margarine", sans-serif;
+  font-weight: 500;
+  background-color: #76e46c;
+  color: #fff;
+  border: #fff;
+  text-decoration: none;
+}
+
+/* Dinamically Added circles to the page in JS and styled them below */
+#circles {
+  position: absolute;
+}
+
+#circles :nth-child(1) {
+  position: absolute;
+  left: 20rem;
+  top: 2rem;
+}
+#circles :nth-child(2) {
+  position: absolute;
+  left: 3rem;
+  top: -1rem;
+}
+#circles :nth-child(3) {
+  position: absolute;
+  left: 6rem;
+  top: 15rem;
+}
+#circles :nth-child(4) {
+  position: absolute;
+  left: 1rem;
+  top: 27rem;
+}
+#circles :nth-child(5) {
+  position: absolute;
+  left: 17rem;
+  top: 40rem;
+}
+
+.circle {
+  width: 50px;
+  height: 50px;
+  background-color: #76e46c;
+  border-radius: 50%;
+  margin: 10px;
+}
