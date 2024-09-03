@@ -11,28 +11,12 @@ function setUpGame() {
         startButton.parentElement.style.display = "none";
         gameContainer.style.display = "block";
         addCirclesToPage("game-circles", 13);
-        // moveCirclesDown();
+        moveCirclesDown();
       });
     } else {
-      console.log("not working");
+      ("");
     }
   });
-}
-
-function addCirclesToPage(elementId, add) {
-  // Adding the circle elements to the page
-  // For the game it will start at the top of the screen
-  const element = document.getElementById(elementId);
-  if (element) {
-    element.innerHTML = "";
-    for (let i = 0; i < add; i++) {
-      let createCircle = document.createElement("div");
-      createCircle.classList.add("circle");
-      element.append(createCircle);
-    }
-  } else {
-    console.error(`Element with ID ${elementId} not found.`);
-  }
 }
 
 const playAgain = document.getElementById("play-again-button");
@@ -41,16 +25,21 @@ const score = document.getElementById("score");
 
 function resetGame() {
   // reset button for the game
-  playAgain.addEventListener("click", () => {
-    playAgainSection.style.display = "none";
-    score.textContent = "0";
 
-    window.circleIntervals.forEach((interval) => clearInterval(interval));
-    window.circleIntervals = [];
+  if (playAgain) {
+    playAgain.addEventListener("click", () => {
+      playAgainSection.style.display = "none";
+      score.textContent = "0";
 
-    addCirclesToPage("game-circles", 13);
-    // moveCirclesDown();
-  });
+      window.circleIntervals.forEach((interval) => clearInterval(interval));
+      window.circleIntervals = [];
+
+      addCirclesToPage("game-circles", 13);
+      moveCirclesDown();
+    });
+  } else {
+    ("");
+  }
 }
 
 setUpGame();
