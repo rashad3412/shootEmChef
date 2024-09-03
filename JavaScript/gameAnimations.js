@@ -1,7 +1,9 @@
 function addCirclesToPage(elementId, add) {
   // Adding the circle elements to the page
   // For the game it will start at the top of the screen
+
   const element = document.getElementById(elementId);
+
   if (element) {
     element.innerHTML = "";
     for (let i = 0; i < add; i++) {
@@ -26,6 +28,7 @@ function moveCirclesDown() {
     let position = 0;
 
     const speed = Math.random() * 2 + 1;
+
     const interval = setInterval(() => {
       if (position >= window.innerHeight) {
         clearInterval(interval);

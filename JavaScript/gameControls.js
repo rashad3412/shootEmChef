@@ -1,12 +1,20 @@
 /* Game Javascript File */
 
-// this is checking to see if the game.html file is reloaded/refreshed if it is refreshed it redirects back to the index.html file.
+//  checking to see if the session for game.html has beem closed or refreshed on the page if the page is refreshed the window will redirect to the index.html file.
 document.addEventListener("DOMContentLoaded", () => {
   if (!sessionStorage.getItem("navigated")) {
     window.location.href = "index.html";
   }
   sessionStorage.removeItem("navigated");
 });
+
+/* 
+
+
+Game Functions Start Here  
+
+
+*/
 
 function bottomCircle() {
   document.addEventListener("DOMContentLoaded", () => {

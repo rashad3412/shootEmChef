@@ -10,7 +10,11 @@ function setUpGame() {
       startButton.addEventListener("click", function () {
         startButton.parentElement.style.display = "none";
         gameContainer.style.display = "block";
+
+        // adding Id from game.html as arg adding circles
         addCirclesToPage("game-circles", 13);
+
+        // Game animation func for circles to go down page.
         moveCirclesDown();
       });
     } else {
@@ -31,6 +35,7 @@ function resetGame() {
       playAgainSection.style.display = "none";
       score.textContent = "0";
 
+      // Create intervals to manage timing of the circles
       window.circleIntervals.forEach((interval) => clearInterval(interval));
       window.circleIntervals = [];
 

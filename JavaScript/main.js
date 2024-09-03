@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
   addCirclesToPage("circles", 5);
 });
 
-// As the document is loaded this is taking a new Game link Varible and checking to see if the game.html file is reloaded/refreshed if the file is reloaded it directs back to the index.html file
+// This is checking to see if the game.html file is still in session in the browswer when the page is refreshed or closed it redirects back to the index.html
+
 document.addEventListener("DOMContentLoaded", () => {
   const newGameLink = document.querySelector('a[href="game.html"]');
   if (newGameLink) {
