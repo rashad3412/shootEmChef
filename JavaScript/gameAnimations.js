@@ -17,6 +17,7 @@ function addCirclesToPage(elementId, add) {
 }
 
 // For circles to move down the screen and pushed into another array.
+
 window.circleIntervals = [];
 
 function moveCirclesDown() {

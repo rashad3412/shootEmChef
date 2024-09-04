@@ -96,7 +96,16 @@ body {
   border-radius: 50%;
   background-color: #76e46c;
   margin: 2px;
-  animation: sideToSide 2s ease-in-out infinite;
+  /* animation: sideToSide 2s ease-in-out infinite; */
+}
+
+.new-circle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #76e46c;
+  border: 1px solid black;
 }
 
 @keyframes sideToSide {
