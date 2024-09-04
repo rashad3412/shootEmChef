@@ -16,9 +16,17 @@ function addCirclesToPage(elementId, add) {
   }
 }
 
+function stopGameAnimation() {
+  window.circleIntervals.forEach((interval) => clearInterval(interval));
+  window.circleIntervals = [];
+  playAgainSection.style.display = "flex";
+  shouldAnimate = false;
+}
+
 // For circles to move down the screen and pushed into another array.
 
 window.circleIntervals = [];
+let shouldAnimate = true;
 
 function moveCirclesDown() {
   // controlling the movement of the circles going down
@@ -27,24 +35,40 @@ function moveCirclesDown() {
 
   circles.forEach((circle, index) => {
     let position = 0;
-
     const speed = Math.random() * 2 + 1;
 
     const interval = setInterval(() => {
-      if (position >= window.innerHeight) {
+      position += speed;
+      circle.style.transform = `translateY(${position}px)`;
+
+      if (position >= window.innerHeight && !playAgainShown) {
         clearInterval(interval);
         if (!playAgainShown) {
-          window.circleIntervals.forEach((interval) => clearInterval(interval));
-          window.circleIntervals = [];
-          playAgainSection.style.display = "flex";
+          stopGameAnimation();
           playAgainShown = true;
         }
-      } else {
-        position += speed;
-        circle.style.transform = `translateY(${position}px)`;
       }
     }, 30);
 
     window.circleIntervals.push(interval);
   });
 }
+
+function bottomCircle() {
+  document.addEventListener("DOMContentLoaded", () => {
+    const bottomCircle = document.getElementById("bottom-circle");
+
+    document.addEventListener("keydown", (event) => {
+      if (event.code === "Space") {
+        // Check if bottomCircle is actually fetched before calling the function
+        if (bottomCircle) {
+          shootCircle(bottomCircle);
+        } else {
+          console.error("bottom-circle element not found");
+        }
+      }
+    });
+  });
+}
+
+bottomCircle();

@@ -21,25 +21,6 @@ Game Functions Start Here
 
 */
 
-function bottomCircle() {
-  document.addEventListener("DOMContentLoaded", () => {
-    const bottomCircle = document.getElementById("bottom-circle");
-
-    document.addEventListener("keydown", (event) => {
-      if (event.code === "Space") {
-        // Check if bottomCircle is actually fetched before calling the function
-        if (bottomCircle) {
-          shootCircle(bottomCircle);
-        } else {
-          console.error("bottom-circle element not found");
-        }
-      }
-    });
-  });
-}
-
-bottomCircle();
-
 function shootCircle(fromElement) {
   if (!fromElement) {
     console.error("shootCircle was called without a valid element.");
@@ -88,6 +69,10 @@ function animateBottomCircle() {
   const screenWidth = window.innerWidth;
 
   function updatePosition() {
+    if (!shouldAnimate) {
+      bottomCircle.style.animation = "none";
+      return;
+    }
     if (moveRight) {
       positionX += 2;
       if (positionX + circleWidth > screenWidth) {

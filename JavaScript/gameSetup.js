@@ -42,6 +42,7 @@ function resetGame() {
       window.circleIntervals = [];
 
       addCirclesToPage("game-circles", 13);
+      shouldAnimate = true;
       moveCirclesDown();
       animateBottomCircle();
     });
@@ -50,5 +51,8 @@ function resetGame() {
   }
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  resetGame();
+});
+
 setUpGame();
-resetGame();
