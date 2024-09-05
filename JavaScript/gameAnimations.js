@@ -16,13 +16,6 @@ function addCirclesToPage(elementId, add) {
   }
 }
 
-function stopGameAnimation() {
-  window.circleIntervals.forEach((interval) => clearInterval(interval));
-  window.circleIntervals = [];
-  playAgainSection.style.display = "flex";
-  shouldAnimate = false;
-}
-
 // For circles to move down the screen and pushed into another array.
 
 window.circleIntervals = [];
@@ -54,21 +47,18 @@ function moveCirclesDown() {
   });
 }
 
+let gameisActive = false;
 function bottomCircle() {
-  document.addEventListener("DOMContentLoaded", () => {
-    const bottomCircle = document.getElementById("bottom-circle");
-
-    document.addEventListener("keydown", (event) => {
-      if (event.code === "Space") {
-        // Check if bottomCircle is actually fetched before calling the function
-        if (bottomCircle) {
-          shootCircle(bottomCircle);
-        } else {
-          console.error("bottom-circle element not found");
-        }
+  const bottomCircle = document.getElementById("bottom-circle");
+  document.addEventListener("keydown", (event) => {
+    if (event.code === "Space" && gameisActive) {
+      if (bottomCircle) {
+        shootCircle(bottomCircle);
+      } else {
+        console.error("bottom-circle element not found");
       }
-    });
+    }
   });
 }
 
-bottomCircle();
+document.addEventListener("DOMContentLoaded", bottomCircle);

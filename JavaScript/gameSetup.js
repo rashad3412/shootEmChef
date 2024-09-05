@@ -9,6 +9,8 @@ function setUpGame() {
   document.addEventListener("DOMContentLoaded", () => {
     if (startButton) {
       startButton.addEventListener("click", function () {
+        gameisActive = true;
+
         startButton.parentElement.style.display = "none";
         gameContainer.style.display = "block";
         bottomCircle.style.animation = "sideToSide 2s ease-in-out infinite";
@@ -17,6 +19,7 @@ function setUpGame() {
         animateBottomCircle();
         addCirclesToPage("game-circles", 13);
         moveCirclesDown();
+
         // Game animation func for circles to go down page.
       });
     } else {
@@ -34,10 +37,10 @@ function resetGame() {
 
   if (playAgain) {
     playAgain.addEventListener("click", () => {
+      gameisActive = true;
       playAgainSection.style.display = "none";
       score.textContent = "0";
 
-      // Create intervals to manage timing of the circles
       window.circleIntervals.forEach((interval) => clearInterval(interval));
       window.circleIntervals = [];
 
@@ -50,9 +53,19 @@ function resetGame() {
     ("");
   }
 }
+setUpGame();
 
 document.addEventListener("DOMContentLoaded", () => {
   resetGame();
 });
 
-setUpGame();
+function stopGameAnimation() {
+  gameisActive = false;
+  playAgainSection.style.display = "flex";
+  score.textContent = "0";
+
+  window.circleIntervals.forEach((interval) => clearInterval(interval));
+  window.circleIntervals = [];
+
+  shouldAnimate = false;
+}
