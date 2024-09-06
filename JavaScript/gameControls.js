@@ -13,47 +13,54 @@ document.addEventListener("DOMContentLoaded", () => {
   sessionStorage.removeItem("navigated");
 });
 
-/* 
+// /*
 
+// Game Functions Start Here
 
-Game Functions Start Here  
+// */
 
+// function shootCircle(fromElement) {
+//   if (!fromElement) {
+//     console.error("shootCircle was called without a valid element.");
+//     return;
+//   }
 
-*/
+//   let newCircle = document.createElement("div");
+//   newCircle.classList.add("new-circle");
+//   document.body.appendChild(newCircle);
+//   const rect = fromElement.getBoundingClientRect();
+//   newCircle.style.position = "absolute";
+//   newCircle.style.left = `${rect.left + rect.width / 2 - 5}px`;
+//   newCircle.style.bottom = `${window.innerHeight - rect.top}px`;
 
-function shootCircle(fromElement) {
-  if (!fromElement) {
-    console.error("shootCircle was called without a valid element.");
-    return;
-  }
+//   let position = parseInt(newCircle.style.bottom, 10);
 
-  let newCircle = document.createElement("div");
+//   let interval = setInterval(() => {
+//     position += 4; // Speed of the projectile
+//     newCircle.style.bottom = `${position}px`;
 
-  // styles are added in CSS
-  newCircle.classList.add("new-circle");
+//     // Check for collisions with each descending circle
+//     document.querySelectorAll(".circle").forEach((circle) => {
+//       if (checkCollision(newCircle, circle)) {
+//         clearInterval(interval);
+//         removeCircle(newCircle); // Remove the shooting circle smoothly
+//         removeCircle(circle); // Remove the hit circle smoothly
+//       }
+//     });
 
-  const rect = fromElement.getBoundingClientRect();
+//     if (position > window.innerHeight) {
+//       clearInterval(interval);
+//       removeCircle(newCircle); // Smoothly remove if it goes off screen
+//     }
+//   }, 20);
 
-  // Gets the element's position relative to the viewport
+// }
 
-  newCircle.style.left = rect.left + rect.width / 2 - 5 + "px";
-  // Center the circle horizontally
-
-  newCircle.style.bottom = window.innerHeight - rect.top + "px";
-  // Position at the bottom of the element
-
-  document.body.appendChild(newCircle);
-
-  let position = parseInt(newCircle.style.bottom, 10);
-
-  let interval = setInterval(() => {
-    position += 4; // Adjust this value to control the speed of the shooting
-    newCircle.style.bottom = position + "px";
-    if (position > window.innerHeight) {
-      clearInterval(interval);
-      document.body.removeChild(newCircle);
-    }
-  }, 20);
+function removeCircle(circle) {
+  circle.classList.add("removing"); // Start the fade-out and shrink effect
+  setTimeout(() => {
+    circle.remove(); // Remove the element from the DOM after the transition
+  }, 300); // 300ms matches the CSS transition duration
 }
 
 function animateBottomCircle() {
@@ -89,4 +96,67 @@ function animateBottomCircle() {
     requestAnimationFrame(updatePosition);
   }
   requestAnimationFrame(updatePosition);
+}
+
+function shootCircle(fromElement) {
+  if (!fromElement) {
+    console.error("shootCircle was called without a valid element.");
+    return;
+  }
+
+  let newCircle = document.createElement("div");
+  newCircle.classList.add("new-circle");
+  document.body.appendChild(newCircle);
+
+  const rect = fromElement.getBoundingClientRect();
+  newCircle.style.position = "absolute";
+  newCircle.style.left = `${rect.left + rect.width / 2 - 5}px`;
+  newCircle.style.bottom = `${window.innerHeight - rect.top}px`;
+
+  let position = parseInt(newCircle.style.bottom, 10);
+
+  function moveCircle() {
+    position += 4;
+    newCircle.style.bottom = `${position}px`;
+
+    // Check for collisions with each descending circle
+    document.querySelectorAll(".circle").forEach((circle) => {
+      if (checkCollision(newCircle, circle)) {
+        removeCircle(newCircle);
+        removeCircle(circle);
+        return; // Exit the animation loop on collision
+      }
+    });
+
+    // Continue animation if not off-screen
+    if (position <= window.innerHeight) {
+      requestAnimationFrame(moveCircle);
+    } else {
+      removeCircle(newCircle);
+    }
+  }
+
+  function removeCircle(circle) {
+    circle.classList.add("removing");
+    setTimeout(() => {
+      if (circle.parentNode) {
+        // Ensure the node is still part of the DOM
+        circle.parentNode.removeChild(circle);
+      }
+    }, 300);
+  }
+
+  function checkCollision(circle1, circle2) {
+    const rect1 = circle1.getBoundingClientRect();
+    const rect2 = circle2.getBoundingClientRect();
+
+    return (
+      rect1.x < rect2.x + rect2.width &&
+      rect1.x + rect1.width > rect2.x &&
+      rect1.y < rect2.y + rect2.height &&
+      rect1.y + rect1.height > rect2.y
+    );
+  }
+
+  requestAnimationFrame(moveCircle);
 }
