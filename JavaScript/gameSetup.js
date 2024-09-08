@@ -1,5 +1,8 @@
 /* This is a helper function for the game Im using this to add circles dynamically to the dom in two different Javascript files. */
 
+let shouldAnimate = true;
+let gameisActive = false;
+
 function setUpGame() {
   // start button of the game when it is clicked
   const startButton = document.getElementById("start-game-button");
@@ -9,7 +12,7 @@ function setUpGame() {
   document.addEventListener("DOMContentLoaded", () => {
     if (startButton) {
       startButton.addEventListener("click", function () {
-        gameisActive = true;
+        gameisActive = true; // Global varible
 
         startButton.parentElement.style.display = "none";
         gameContainer.style.display = "block";
@@ -27,6 +30,10 @@ function setUpGame() {
     }
   });
 }
+
+setUpGame();
+
+///////////////////////////////
 
 const playAgain = document.getElementById("play-again-button");
 const playAgainSection = document.getElementById("play-again-button-section");
@@ -57,19 +64,20 @@ function resetGame() {
     ("");
   }
 }
-setUpGame();
 
 document.addEventListener("DOMContentLoaded", () => {
   resetGame();
 });
 
+///////////////////////////////////
+
 function stopGameAnimation() {
-  gameisActive = false;
+  gameisActive = false; // Global varible
   playAgainSection.style.display = "flex";
   score.textContent = "0";
 
   window.circleIntervals.forEach((interval) => clearInterval(interval));
   window.circleIntervals = [];
 
-  shouldAnimate = false;
+  shouldAnimate = false; // Global varible
 }

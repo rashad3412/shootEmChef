@@ -13,55 +13,59 @@ document.addEventListener("DOMContentLoaded", () => {
   sessionStorage.removeItem("navigated");
 });
 
-/*
-
-Game Functions Start Here
-
-*/
+// Game Functions
 
 function shootCircle(fromElement) {
+  // Validate the provided element
   if (!fromElement) {
     console.error("shootCircle was called without a valid element.");
     return;
   }
 
-  let newCircle = document.createElement("div");
+  // Create the new circle element
+  const newCircle = document.createElement("div");
   newCircle.classList.add("new-circle");
   document.body.appendChild(newCircle);
 
+  // Get the dimensions and position of the shooting element
+
   const rect = fromElement.getBoundingClientRect();
+  const initialLeft = rect.left + rect.width / 2 - 5;
+  const bottom = window.innerHeight - rect.top;
+
+  // Set the new circle's position and style
+
   newCircle.style.position = "absolute";
-  newCircle.style.left = `${rect.left + rect.width / 2 - 5}px`;
-  newCircle.style.bottom = `${window.innerHeight - rect.top}px`;
+  newCircle.style.left = `${initialLeft}px`;
+  newCircle.style.bottom = `${bottom}px`;
+
+  // Animate the movement and collision detection of the shooting circle
 
   let position = parseInt(newCircle.style.bottom, 10);
 
-  let interval = setInterval(() => {
+  const interval = setInterval(() => {
     position += 4; // Speed of the projectile
     newCircle.style.bottom = `${position}px`;
 
-    // Check for collisions with each descending circle
+    // Check for collisions with every descending circle
     document.querySelectorAll(".circle").forEach((circle) => {
       if (checkCollision(newCircle, circle)) {
         clearInterval(interval);
         removeCircle(newCircle); // Remove the shooting circle smoothly
         removeCircle(circle); // Remove the hit circle smoothly
-        updateScore(1);
+        updateScore(1); // Update the score on collision
       }
     });
 
+    // Remove the circle if it goes off screen
     if (position > window.innerHeight) {
       clearInterval(interval);
-      removeCircle(newCircle); // Smoothly remove if it goes off screen
+      removeCircle(newCircle);
     }
   }, 20);
 }
 
-function updateScore(increment) {
-  const scoreElement = document.getElementById("score");
-  currentScore += increment; // Increment the current score
-  scoreElement.textContent = currentScore; // Update the DOM
-}
+//////////////////////////////
 
 function removeCircle(circle) {
   circle.classList.add("removing"); // Start the fade-out and shrink effect
@@ -70,12 +74,22 @@ function removeCircle(circle) {
   }, 300); // 300ms matches the CSS transition duration
 }
 
+function updateScore(increment) {
+  const scoreElement = document.getElementById("score");
+  currentScore += increment; // Increment the current score
+  scoreElement.textContent = currentScore; // Update the DOM
+}
+
+///////////////////////////////
+
 function animateBottomCircle() {
   const bottomCircle = document.getElementById("bottom-circle");
   if (!bottomCircle) {
     console.error("bottom-circle element not found");
     return;
   }
+
+  //////////////////////////////
 
   let positionX = bottomCircle.offsetLeft;
   let moveRight = true;
@@ -102,8 +116,11 @@ function animateBottomCircle() {
     bottomCircle.style.left = positionX + "px";
     requestAnimationFrame(updatePosition);
   }
+  // Start the animation loop
   requestAnimationFrame(updatePosition);
 }
+
+//////////////////////////////
 
 function removeCircle(circle) {
   circle.classList.add("removing");
@@ -114,6 +131,8 @@ function removeCircle(circle) {
     }
   }, 300);
 }
+
+//////////////////////////////
 
 function checkCollision(circle1, circle2) {
   const rect1 = circle1.getBoundingClientRect();

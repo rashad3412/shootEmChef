@@ -19,7 +19,6 @@ function addCirclesToPage(elementId, add) {
 // For circles to move down the screen and pushed into another array.
 
 window.circleIntervals = [];
-let shouldAnimate = true;
 
 function moveCirclesDown() {
   // controlling the movement of the circles going down
@@ -47,8 +46,6 @@ function moveCirclesDown() {
     window.circleIntervals.push(interval);
   });
 }
-
-let gameisActive = false;
 
 function bottomCircle() {
   const bottomCircle = document.getElementById("bottom-circle");
