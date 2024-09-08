@@ -36,18 +36,20 @@ function moveCirclesDown() {
 
       if (position >= window.innerHeight && !playAgainShown) {
         clearInterval(interval);
+        removeCircle(circle);
         if (!playAgainShown) {
           stopGameAnimation();
           playAgainShown = true;
         }
       }
-    }, 30);
+    }, 100);
 
     window.circleIntervals.push(interval);
   });
 }
 
 let gameisActive = false;
+
 function bottomCircle() {
   const bottomCircle = document.getElementById("bottom-circle");
   document.addEventListener("keydown", (event) => {

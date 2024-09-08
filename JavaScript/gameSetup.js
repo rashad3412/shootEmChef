@@ -17,7 +17,7 @@ function setUpGame() {
 
         // adding Id from game.html as arg adding circles
         animateBottomCircle();
-        addCirclesToPage("game-circles", 13);
+        addCirclesToPage("game-circles", 15);
         moveCirclesDown();
 
         // Game animation func for circles to go down page.
@@ -32,8 +32,12 @@ const playAgain = document.getElementById("play-again-button");
 const playAgainSection = document.getElementById("play-again-button-section");
 const score = document.getElementById("score");
 
+let currentScore = 0;
+
 function resetGame() {
+  currentScore = 0;
   // reset button for the game
+  updateScore(0);
 
   if (playAgain) {
     playAgain.addEventListener("click", () => {
@@ -44,7 +48,7 @@ function resetGame() {
       window.circleIntervals.forEach((interval) => clearInterval(interval));
       window.circleIntervals = [];
 
-      addCirclesToPage("game-circles", 13);
+      addCirclesToPage("game-circles", 35);
       shouldAnimate = true;
       moveCirclesDown();
       animateBottomCircle();
