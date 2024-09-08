@@ -44,7 +44,7 @@ let currentScore = 0;
 function resetGame() {
   currentScore = 0;
   // reset button for the game
-  updateScore(0);
+  // updateScore(0);
 
   if (playAgain) {
     playAgain.addEventListener("click", () => {

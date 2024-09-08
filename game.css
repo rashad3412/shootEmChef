@@ -122,3 +122,8 @@ body {
   transform: scale(1);
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
+
+#img-container {
+  position: absolute;
+  border: solid black 2px;
+}

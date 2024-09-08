@@ -16,6 +16,29 @@ function addCirclesToPage(elementId, add) {
   }
 }
 
+//////////////////////////////////////
+
+function addImagesToPage(elementId, imageCount) {
+  const container = document.getElementById(elementId);
+
+  if (!container) {
+    console.error(`Element with ID ${elementId} not found.`);
+    return; // Exit the function if the container isn't found
+  }
+
+  container.innerHTML = "";
+
+  for (let i = 1; i <= imageCount; i++) {
+    let img = document.createElement("img");
+    img.src = `assets/FoodPic/FoodPic${i}.png`; // Ensure no spaces in the file path
+    img.alt = `Image ${i}`;
+    img.classList.add("game-image");
+    container.appendChild(img);
+  }
+}
+
+addImagesToPage("img-container", 4);
+
 // For circles to move down the screen and pushed into another array.
 
 window.circleIntervals = [];

@@ -6,12 +6,12 @@ Game Controls
 
 //  checking to see if the session for game.html has beem closed or refreshed on the page if the page is refreshed the window will redirect to the index.html file.
 
-document.addEventListener("DOMContentLoaded", () => {
-  if (!sessionStorage.getItem("navigated")) {
-    window.location.href = "index.html";
-  }
-  sessionStorage.removeItem("navigated");
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   if (!sessionStorage.getItem("navigated")) {
+//     window.location.href = "index.html";
+//   }
+//   sessionStorage.removeItem("navigated");
+// });
 
 // Game Functions
 
@@ -145,5 +145,3 @@ function checkCollision(circle1, circle2) {
     rect1.y + rect1.height > rect2.y
   );
 }
-
-requestAnimationFrame(moveCircle);
