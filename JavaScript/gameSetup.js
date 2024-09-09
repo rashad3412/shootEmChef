@@ -20,8 +20,8 @@ function setUpGame() {
 
         // adding Id from game.html as arg adding circles
         animateBottomCircle();
-        addCirclesToPage("game-circles", 15);
-        moveCirclesDown();
+        addImagesToPage("img-container", 4);
+        moveImagesDown();
 
         // Game animation func for circles to go down page.
       });
@@ -44,20 +44,21 @@ let currentScore = 0;
 function resetGame() {
   currentScore = 0;
   // reset button for the game
-  // updateScore(0);
+  updateScore(0);
 
   if (playAgain) {
     playAgain.addEventListener("click", () => {
       gameisActive = true;
+      shouldAnimate = true;
+
       playAgainSection.style.display = "none";
       score.textContent = "0";
 
-      window.circleIntervals.forEach((interval) => clearInterval(interval));
-      window.circleIntervals = [];
+      window.imgIntervals.forEach((interval) => clearInterval(interval));
+      window.imgIntervals = [];
 
-      addCirclesToPage("game-circles", 35);
-      shouldAnimate = true;
-      moveCirclesDown();
+      addImagesToPage("img-container", 4);
+      moveImagesDown();
       animateBottomCircle();
     });
   } else {
@@ -73,11 +74,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function stopGameAnimation() {
   gameisActive = false; // Global varible
+  shouldAnimate = false; // Global varible
+
   playAgainSection.style.display = "flex";
   score.textContent = "0";
 
-  window.circleIntervals.forEach((interval) => clearInterval(interval));
-  window.circleIntervals = [];
-
-  shouldAnimate = false; // Global varible
+  window.imgIntervals.forEach((interval) => clearInterval(interval));
+  window.imgIntervals = [];
 }

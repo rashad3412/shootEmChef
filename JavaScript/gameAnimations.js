@@ -1,19 +1,32 @@
-function addCirclesToPage(elementId, add) {
-  // Adding the circle elements to the page
-  // For the game it will start at the top of the screen
+//////////////////////////////////////
 
-  const element = document.getElementById(elementId);
+window.imgIntervals = [];
 
-  if (element) {
-    element.innerHTML = "";
-    for (let i = 0; i < add; i++) {
-      let createCircle = document.createElement("div");
-      createCircle.classList.add("circle");
-      element.append(createCircle);
-    }
-  } else {
-    console.error(`Element with ID ${elementId} not found.`);
-  }
+function moveImagesDown() {
+  // controlling the movement of the circles going down
+  const imagesGoingDownScreen = document.querySelectorAll("#img-container img");
+  let playAgainShown = false;
+
+  imagesGoingDownScreen.forEach((img, index) => {
+    let position = 0;
+    const speed = Math.random() * 2 + 1;
+
+    const interval = setInterval(() => {
+      position += speed;
+      img.style.transform = `translateY(${position}px)`;
+
+      if (position >= window.innerHeight && !playAgainShown) {
+        clearInterval(interval);
+        removeImageAndShotProjectile(img);
+        if (!playAgainShown) {
+          stopGameAnimation();
+          playAgainShown = true;
+        }
+      }
+    }, 35);
+
+    window.imgIntervals.push(interval);
+  });
 }
 
 //////////////////////////////////////
@@ -35,39 +48,6 @@ function addImagesToPage(elementId, imageCount) {
     img.classList.add("game-image");
     container.appendChild(img);
   }
-}
-
-addImagesToPage("img-container", 4);
-
-// For circles to move down the screen and pushed into another array.
-
-window.circleIntervals = [];
-
-function moveCirclesDown() {
-  // controlling the movement of the circles going down
-  const circles = document.querySelectorAll(".circle");
-  let playAgainShown = false;
-
-  circles.forEach((circle, index) => {
-    let position = 0;
-    const speed = Math.random() * 2 + 1;
-
-    const interval = setInterval(() => {
-      position += speed;
-      circle.style.transform = `translateY(${position}px)`;
-
-      if (position >= window.innerHeight && !playAgainShown) {
-        clearInterval(interval);
-        removeCircle(circle);
-        if (!playAgainShown) {
-          stopGameAnimation();
-          playAgainShown = true;
-        }
-      }
-    }, 100);
-
-    window.circleIntervals.push(interval);
-  });
 }
 
 function bottomCircle() {

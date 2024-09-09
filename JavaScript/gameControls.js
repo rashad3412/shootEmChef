@@ -16,62 +16,59 @@ Game Controls
 // Game Functions
 
 function shootCircle(fromElement) {
-  // Validate the provided element
   if (!fromElement) {
     console.error("shootCircle was called without a valid element.");
     return;
   }
 
-  // Create the new circle element
-  const newCircle = document.createElement("div");
-  newCircle.classList.add("new-circle");
-  document.body.appendChild(newCircle);
-
-  // Get the dimensions and position of the shooting element
+  const shootingProjectile = document.createElement("div");
+  shootingProjectile.classList.add("shots");
+  document.body.appendChild(shootingProjectile);
 
   const rect = fromElement.getBoundingClientRect();
   const initialLeft = rect.left + rect.width / 2 - 5;
   const bottom = window.innerHeight - rect.top;
 
-  // Set the new circle's position and style
+  shootingProjectile.style.position = "absolute";
+  shootingProjectile.style.left = `${initialLeft}px`;
+  shootingProjectile.style.bottom = `${bottom}px`;
 
-  newCircle.style.position = "absolute";
-  newCircle.style.left = `${initialLeft}px`;
-  newCircle.style.bottom = `${bottom}px`;
-
-  // Animate the movement and collision detection of the shooting circle
-
-  let position = parseInt(newCircle.style.bottom, 10);
+  let position = parseInt(shootingProjectile.style.bottom, 10);
 
   const interval = setInterval(() => {
-    position += 4; // Speed of the projectile
-    newCircle.style.bottom = `${position}px`;
+    position += 4;
+    shootingProjectile.style.bottom = `${position}px`;
 
-    // Check for collisions with every descending circle
-    document.querySelectorAll(".circle").forEach((circle) => {
-      if (checkCollision(newCircle, circle)) {
+    document.querySelectorAll("#img-container img ").forEach((img) => {
+      if (checkCollision(shootingProjectile, img)) {
         clearInterval(interval);
-        removeCircle(newCircle); // Remove the shooting circle smoothly
-        removeCircle(circle); // Remove the hit circle smoothly
-        updateScore(1); // Update the score on collision
+        removeImageAndShotProjectile(shootingProjectile);
+        removeImageAndShotProjectile(img);
+        updateScore(1);
       }
     });
 
-    // Remove the circle if it goes off screen
     if (position > window.innerHeight) {
       clearInterval(interval);
-      removeCircle(newCircle);
+      shootingProjectile.remove();
     }
   }, 20);
+
+  // Ensure the interval array exists before pushing to it
+  if (!window.imageIntervals) {
+    window.imageIntervals = [];
+  }
+
+  window.imageIntervals.push(interval);
 }
 
 //////////////////////////////
 
-function removeCircle(circle) {
-  circle.classList.add("removing"); // Start the fade-out and shrink effect
+function removeImageAndShotProjectile(item) {
+  item.classList.add("removing"); // Assuming some CSS for a fade-out effect
   setTimeout(() => {
-    circle.parentNode.removeChild(circle); // Remove the element from the DOM after the transition
-  }, 300); // 300ms matches the CSS transition duration
+    item.remove(); // Remove the circle from the DOM after a delay
+  }, 300);
 }
 
 function updateScore(increment) {
@@ -122,21 +119,9 @@ function animateBottomCircle() {
 
 //////////////////////////////
 
-function removeCircle(circle) {
-  circle.classList.add("removing");
-  setTimeout(() => {
-    if (circle.parentNode) {
-      // Ensure the node is still part of the DOM
-      circle.parentNode.removeChild(circle);
-    }
-  }, 300);
-}
-
-//////////////////////////////
-
-function checkCollision(circle1, circle2) {
-  const rect1 = circle1.getBoundingClientRect();
-  const rect2 = circle2.getBoundingClientRect();
+function checkCollision(img1, img2) {
+  const rect1 = img1.getBoundingClientRect();
+  const rect2 = img2.getBoundingClientRect();
 
   return (
     rect1.x < rect2.x + rect2.width &&
