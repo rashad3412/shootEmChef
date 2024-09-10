@@ -20,7 +20,7 @@ function setUpGame() {
 
         // adding Id from game.html as arg adding circles
         animateBottomCircle();
-        addImagesToPage("img-container", 4);
+        addImagesToPage("img-container", 18);
         moveImagesDown();
 
         // Game animation func for circles to go down page.
@@ -31,8 +31,6 @@ function setUpGame() {
   });
 }
 
-setUpGame();
-
 ///////////////////////////////
 
 const playAgain = document.getElementById("play-again-button");
@@ -42,7 +40,6 @@ const score = document.getElementById("score");
 let currentScore = 0;
 
 function resetGame() {
-  currentScore = 0;
   // reset button for the game
   updateScore(0);
 
@@ -57,7 +54,7 @@ function resetGame() {
       window.imgIntervals.forEach((interval) => clearInterval(interval));
       window.imgIntervals = [];
 
-      addImagesToPage("img-container", 4);
+      addImagesToPage("img-container", 18);
       moveImagesDown();
       animateBottomCircle();
     });
@@ -66,19 +63,9 @@ function resetGame() {
   }
 }
 
+setUpGame();
 document.addEventListener("DOMContentLoaded", () => {
   resetGame();
 });
 
 ///////////////////////////////////
-
-function stopGameAnimation() {
-  gameisActive = false; // Global varible
-  shouldAnimate = false; // Global varible
-
-  playAgainSection.style.display = "flex";
-  score.textContent = "0";
-
-  window.imgIntervals.forEach((interval) => clearInterval(interval));
-  window.imgIntervals = [];
-}

@@ -117,15 +117,8 @@ body {
   }
 }
 
-.circle.removing {
-  opacity: 0;
-  transform: scale(1);
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-}
-
 #img-container {
   position: relative;
-  border: solid black 2px;
 }
 
 img.game-image {
