@@ -58,6 +58,10 @@ function shootImages(fromElement) {
     }
   }, 20);
 
+  if (!window.imageIntervals) {
+    window.imageIntervals = [];
+  }
+
   window.imageIntervals.push(interval);
 }
 

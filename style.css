@@ -45,6 +45,7 @@ body::before {
   -webkit-text-fill-color: transparent;
   color: transparent;
   text-shadow: 0 0 8px rgba(0, 0, 0, 0.2), 0 0 16px rgba(255, 255, 255, 0.6);
+  filter: brightness(1.01);
 }
 
 .game-title {
@@ -52,6 +53,7 @@ body::before {
   margin-left: 45px;
   font-size: 1.5em;
   top: 3em;
+  filter: brightness(1.3);
 }
 
 .game-title :nth-child(1) {
@@ -94,6 +96,7 @@ a {
   border-color: #1abc9c;
   text-decoration: none;
   text-shadow: 0 0 8px rgba(0, 0, 0, 0.2), 0 0 16px rgba(255, 255, 255, 0.6);
+  filter: brightness(1.02);
 }
 
 /* Dinamically Added circles to the page in JS and styled them below */
@@ -103,6 +106,5 @@ img {
   margin-left: 20px;
   height: 80px;
   width: 80px;
-
   filter: contrast(125%);
 }

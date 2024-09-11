@@ -5,29 +5,23 @@ function addImagesToPage(elementId, imageCount) {
 
   if (!container) {
     console.error(`Element with ID ${elementId} not found.`);
-    return; // Exit the function if the container isn't found
+    return;
   }
 
   container.innerHTML = "";
 
-  const addedImages = new Set();
-
   for (let i = 1; i <= imageCount; i++) {
-    const imgSrc = `assets/FoodPic/foodPic${i}.png`;
+    let img = document.createElement("img");
+    img.src = `assets/FoodPic/foodPic${i}.png`;
+    img.alt = `Image ${i}`;
+    img.classList.add("game-image");
 
-    if (!addedImages.has(imgSrc)) {
-      let img = document.createElement("img");
+    // Fix the position of each image so they don't move unexpectedly
+    img.style.position = "absolute";
+    img.style.top = `${Math.random() * 100}px`; // Random starting position
+    img.style.left = `${Math.random() * (container.offsetWidth - 50)}px`; // Random horizontal placement
 
-      img.src = imgSrc;
-      img.alt = `Image ${i}`;
-      img.classList.add("game-image");
-
-      // Add image to the container
-      container.appendChild(img);
-
-      // Track this image to prevent duplicates
-      addedImages.add(imgSrc);
-    }
+    container.appendChild(img);
   }
 }
 
@@ -36,10 +30,9 @@ function addImagesToPage(elementId, imageCount) {
 window.imgIntervals = [];
 
 function moveImagesDown() {
-  // controlling the movement of the circles going down
   const imagesGoingDownScreen = document.querySelectorAll("#img-container img");
-
   let playAgainShown = false;
+  let totalImages = imagesGoingDownScreen.length;
 
   imagesGoingDownScreen.forEach((img, index) => {
     let position = 0;
@@ -53,9 +46,10 @@ function moveImagesDown() {
         clearInterval(interval);
         removeImageAndShotProjectile(img);
 
+        totalImages--;
         if (!playAgainShown) {
           stopGameAnimation();
-          // playAgainShown = true;
+          playAgainShown = true;
         }
       }
     }, 35);
@@ -75,10 +69,12 @@ function stopGameAnimation() {
   window.imgIntervals = [];
 }
 
+// Your bottomCircle function to prevent shooting after reset
 function bottomCircle() {
   const bottomCircle = document.getElementById("bottom-circle");
   document.addEventListener("keydown", (event) => {
     if (event.code === "Space" && gameisActive) {
+      // Ensure shooting is only possible when the game is active
       if (bottomCircle) {
         shootImages(bottomCircle);
       } else {
@@ -87,7 +83,5 @@ function bottomCircle() {
     }
   });
 }
-
-bottomCircle();
 
 document.addEventListener("DOMContentLoaded", bottomCircle);

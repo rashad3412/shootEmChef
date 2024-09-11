@@ -29,6 +29,20 @@ function setUpGame() {
   });
 }
 
+/////////////////////////////////////////////
+
+function updateScore(increment) {
+  const scoreElement = document.getElementById("score");
+
+  // Ensure currentScore is defined before incrementing
+  if (typeof currentScore === "undefined") {
+    currentScore = 0;
+  }
+
+  currentScore += increment;
+  scoreElement.textContent = currentScore;
+}
+
 ///////////////////////////////
 
 const playAgain = document.getElementById("play-again-button");
@@ -47,13 +61,15 @@ function resetGame() {
       playAgainSection.style.display = "none";
       score.textContent = currentScore;
 
+      // Clear any existing intervals
+      clearAllIntervals();
+
       window.imgIntervals.forEach((interval) => clearInterval(interval));
       window.imgIntervals = [];
 
       addImagesToPage("img-container", 15);
       moveImagesDown();
       animateBottomCircle();
-      resetScore();
     });
   } else {
     ("");
@@ -63,16 +79,18 @@ function resetGame() {
 setUpGame();
 resetGame();
 
-function updateScore(increment) {
-  const scoreElement = document.getElementById("score");
-
-  // Ensure currentScore is defined before incrementing
-  if (typeof currentScore === "undefined") {
-    currentScore = 0;
+///////////////////////////////////
+// Function to clear all intervals including shooting and movement
+function clearAllIntervals() {
+  // Stop all image intervals
+  if (window.imgIntervals) {
+    window.imgIntervals.forEach((interval) => clearInterval(interval));
+    window.imgIntervals = [];
   }
 
-  currentScore += increment;
-  scoreElement.textContent = currentScore;
+  // Stop all shooting intervals
+  if (window.imageIntervals) {
+    window.imageIntervals.forEach((interval) => clearInterval(interval));
+    window.imageIntervals = [];
+  }
 }
-
-///////////////////////////////////
