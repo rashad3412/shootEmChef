@@ -7,7 +7,6 @@ function setUpGame() {
   // start button of the game when it is clicked
   const startButton = document.getElementById("start-game-button");
   const gameContainer = document.getElementById("game-container");
-  const bottomCircle = document.getElementById("bottom-circle");
 
   document.addEventListener("DOMContentLoaded", () => {
     if (startButton) {
@@ -16,12 +15,11 @@ function setUpGame() {
 
         startButton.parentElement.style.display = "none";
         gameContainer.style.display = "block";
-        bottomCircle.style.animation = "sideToSide 2s ease-in-out infinite";
 
         // adding Id from game.html as arg adding circles
-        animateBottomCircle();
-        addImagesToPage("img-container", 18);
+        addImagesToPage("img-container", 15);
         moveImagesDown();
+        animateBottomCircle();
 
         // Game animation func for circles to go down page.
       });
@@ -35,28 +33,27 @@ function setUpGame() {
 
 const playAgain = document.getElementById("play-again-button");
 const playAgainSection = document.getElementById("play-again-button-section");
-const score = document.getElementById("score");
-
-let currentScore = 0;
 
 function resetGame() {
   // reset button for the game
-  updateScore(0);
 
   if (playAgain) {
     playAgain.addEventListener("click", () => {
       gameisActive = true;
       shouldAnimate = true;
 
+      currentScore = 0; //
+
       playAgainSection.style.display = "none";
-      score.textContent = "0";
+      score.textContent = currentScore;
 
       window.imgIntervals.forEach((interval) => clearInterval(interval));
       window.imgIntervals = [];
 
-      addImagesToPage("img-container", 18);
+      addImagesToPage("img-container", 15);
       moveImagesDown();
       animateBottomCircle();
+      resetScore();
     });
   } else {
     ("");
@@ -64,8 +61,18 @@ function resetGame() {
 }
 
 setUpGame();
-document.addEventListener("DOMContentLoaded", () => {
-  resetGame();
-});
+resetGame();
+
+function updateScore(increment) {
+  const scoreElement = document.getElementById("score");
+
+  // Ensure currentScore is defined before incrementing
+  if (typeof currentScore === "undefined") {
+    currentScore = 0;
+  }
+
+  currentScore += increment;
+  scoreElement.textContent = currentScore;
+}
 
 ///////////////////////////////////

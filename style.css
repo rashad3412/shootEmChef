@@ -6,27 +6,57 @@
 
 /* Styling for New Game Screen */
 body {
-  background-color: #187b91;
+  position: relative;
+  height: 100vh;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
+  background-blend-mode: overlay;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("assets/FoodPic/cozy kitchen (45).jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3; /* Adjust this value to change the opacity */
+  z-index: -1;
 }
 
 /* Game Title Styling on first page */
-.game-title {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 75vh;
-  margin-top: 5%;
+.title {
   font-family: "Margarine", sans-serif;
-  font-weight: 500;
-  color: #fff;
-  font-size: 1.4em;
+  font-weight: 700;
   letter-spacing: 0.5em;
+  text-align: center;
+
+  background: linear-gradient(
+    90deg,
+    #ff6b6b,
+    #f1c40f,
+    #1abc9c
+  ); /* Gradient background */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.2), 0 0 16px rgba(255, 255, 255, 0.6);
+}
+
+.game-title {
+  position: relative;
+  margin-left: 45px;
+  font-size: 1.5em;
+  top: 3em;
 }
 
 .game-title :nth-child(1) {
   position: relative;
-  right: 22%;
+  right: 18%;
 }
 .game-title :nth-child(2) {
   position: relative;
@@ -42,55 +72,37 @@ a {
   display: flex;
   justify-content: center;
   position: absolute;
-  top: 74%;
+  top: 70%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 200px;
-  font-size: 1.7em;
+  font-size: 1.8em;
   border-radius: 5px;
+  letter-spacing: 0.2em;
   font-family: "Margarine", sans-serif;
   font-weight: 500;
-  background-color: #76e46c;
-  color: #fff;
-  border: #fff;
+  background: linear-gradient(
+    90deg,
+    #ff6b6b,
+    #f1c40f,
+    #1abc9c
+  ); /* Gradient background */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  border: #fff solid 2px;
+  border-color: #1abc9c;
   text-decoration: none;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.2), 0 0 16px rgba(255, 255, 255, 0.6);
 }
 
 /* Dinamically Added circles to the page in JS and styled them below */
-#circles {
-  position: absolute;
-}
 
-#circles :nth-child(1) {
-  position: absolute;
-  left: 20rem;
-  top: 2rem;
-}
-#circles :nth-child(2) {
-  position: absolute;
-  left: 3rem;
-  top: -1rem;
-}
-#circles :nth-child(3) {
-  position: absolute;
-  left: 6rem;
-  top: 15rem;
-}
-#circles :nth-child(4) {
-  position: absolute;
-  left: 1rem;
-  top: 27rem;
-}
-#circles :nth-child(5) {
-  position: absolute;
-  left: 17rem;
-  top: 40rem;
-}
+img {
+  position: relative;
+  margin-left: 20px;
+  height: 80px;
+  width: 80px;
 
-.circle {
-  width: 50px;
-  height: 50px;
-  background-color: #76e46c;
-  border-radius: 50%;
-  margin: 10px;
+  filter: contrast(125%);
 }

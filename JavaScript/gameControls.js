@@ -6,6 +6,10 @@ Game Controls
 
 //  checking to see if the session for game.html has beem closed or refreshed on the page if the page is refreshed the window will redirect to the index.html file.
 
+if (!window.imageIntervals) {
+  window.imageIntervals = [];
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   if (!sessionStorage.getItem("navigated")) {
     window.location.href = "index.html";
@@ -54,35 +58,28 @@ function shootImages(fromElement) {
     }
   }, 20);
 
-  // Ensure the interval array exists before pushing to it
-  if (!window.imageIntervals) {
-    window.imageIntervals = [];
-  }
-
   window.imageIntervals.push(interval);
 }
 
 //////////////////////////////
 
 function removeImageAndShotProjectile(item) {
-  item.classList.add("removing"); // Assuming some CSS for a fade-out effect
+  item.classList.add("removing");
   setTimeout(() => {
-    item.remove(); // Remove the circle from the DOM after a delay
+    if (item.parentNode) {
+      item.remove();
+    }
   }, 300);
-}
-
-function updateScore(increment) {
-  const scoreElement = document.getElementById("score");
-  currentScore += increment; // Increment the current score
-  scoreElement.textContent = currentScore; // Update the DOM
 }
 
 ///////////////////////////////
 
 function animateBottomCircle() {
   const bottomCircle = document.getElementById("bottom-circle");
+
   if (!bottomCircle) {
     console.error("bottom-circle element not found");
+    bottomCircle.style.animation = "sideToSide 2s ease-in-out infinite";
     return;
   }
 
