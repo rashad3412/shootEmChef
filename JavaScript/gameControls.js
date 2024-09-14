@@ -47,7 +47,12 @@ function shootImages(fromElement) {
       if (checkCollision(shootingProjectile, img)) {
         clearInterval(interval);
         removeImageAndShotProjectile(shootingProjectile);
-        removeImageAndShotProjectile(img);
+        removeImageAndShotProjectile(img, function () {
+          // Check if any images are left after removal
+          if (document.querySelectorAll("#img-container img").length === 0) {
+            stopGameAnimation();
+          }
+        });
         updateScore(1);
       }
     });
@@ -67,11 +72,15 @@ function shootImages(fromElement) {
 
 //////////////////////////////
 
-function removeImageAndShotProjectile(item) {
+function removeImageAndShotProjectile(item, callback) {
   item.classList.add("removing");
   setTimeout(() => {
     if (item.parentNode) {
       item.remove();
+    }
+
+    if (callback) {
+      callback();
     }
   }, 300);
 }

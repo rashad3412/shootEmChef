@@ -31,7 +31,7 @@ body::before {
   display: flex;
   justify-content: center;
   position: relative;
-  top: 16vh;
+  top: 32vh;
 }
 
 #start-game-button {
@@ -63,7 +63,7 @@ body::before {
   display: none;
   justify-content: center;
   position: relative;
-  top: 16vh;
+  top: 30vh;
 }
 
 #play-again-button {
@@ -100,6 +100,7 @@ body::before {
 }
 
 #score {
+  position: absolute;
   font-family: "Margarine", sans-serif; /* Fun, playful font */
   font-size: 5rem; /* Make the score number larger */
   color: #ff6b6b; /* Bright color */

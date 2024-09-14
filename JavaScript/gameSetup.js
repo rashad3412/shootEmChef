@@ -55,14 +55,15 @@ function resetGame() {
     playAgain.addEventListener("click", () => {
       gameisActive = true;
       shouldAnimate = true;
+      playAgainShown = false;
+
+      // Clear any existing intervals
+      clearAllIntervals();
 
       currentScore = 0; //
 
       playAgainSection.style.display = "none";
       score.textContent = currentScore;
-
-      // Clear any existing intervals
-      clearAllIntervals();
 
       window.imgIntervals.forEach((interval) => clearInterval(interval));
       window.imgIntervals = [];

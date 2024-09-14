@@ -5,23 +5,34 @@ function addImagesToPage(elementId, imageCount) {
 
   if (!container) {
     console.error(`Element with ID ${elementId} not found.`);
-    return;
+    return; // Exit the function if the container isn't found
   }
 
   container.innerHTML = "";
 
+  const addedImages = new Set();
+
   for (let i = 1; i <= imageCount; i++) {
-    let img = document.createElement("img");
-    img.src = `assets/FoodPic/foodPic${i}.png`;
-    img.alt = `Image ${i}`;
-    img.classList.add("game-image");
+    const imgSrc = `assets/FoodPic/foodPic${i}.png`;
 
-    // Fix the position of each image so they don't move unexpectedly
-    img.style.position = "absolute";
-    img.style.top = `${Math.random() * 100}px`; // Random starting position
-    img.style.left = `${Math.random() * (container.offsetWidth - 50)}px`; // Random horizontal placement
+    if (!addedImages.has(imgSrc)) {
+      let img = document.createElement("img");
 
-    container.appendChild(img);
+      img.src = imgSrc;
+      img.alt = `Image ${i}`;
+      img.classList.add("game-image");
+
+      // Fix the position of each image so they don't move unexpectedly
+      img.style.position = "absolute";
+      img.style.top = `${Math.random() * 100}px`; // Random starting position
+      img.style.left = `${Math.random() * (container.offsetWidth - 50)}px`; // Random horizontal placement
+
+      // Add image to the container
+      container.appendChild(img);
+
+      // Track this image to prevent duplicates
+      addedImages.add(imgSrc);
+    }
   }
 }
 
@@ -46,10 +57,8 @@ function moveImagesDown() {
         clearInterval(interval);
         removeImageAndShotProjectile(img);
 
-        totalImages--;
-        if (!playAgainShown) {
+        if (document.querySelectorAll("#img-container img").length === 0) {
           stopGameAnimation();
-          playAgainShown = true;
         }
       }
     }, 35);
