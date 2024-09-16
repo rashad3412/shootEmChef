@@ -17,8 +17,9 @@ function setUpGame() {
         gameContainer.style.display = "block";
 
         // adding Id from game.html as arg adding circles
-        addImagesToPage("img-container", 15);
+        addImagesToPage("img-container", 18);
         moveImagesDown();
+        bottomCircle();
         animateBottomCircle();
 
         // Game animation func for circles to go down page.
@@ -53,24 +54,36 @@ function resetGame() {
 
   if (playAgain) {
     playAgain.addEventListener("click", () => {
+      playAgainShown = false;
       gameisActive = true;
       shouldAnimate = true;
-      playAgainShown = false;
 
-      // Clear any existing intervals
+      // Hide the Play Again section
+      playAgainSection.style.display = "none";
+
+      // Clear all intervals related to images and projectiles
       clearAllIntervals();
 
-      currentScore = 0; //
+      // Remove any remaining projectiles from the DOM
+      const projectiles = document.querySelectorAll(".shots");
+      projectiles.forEach((projectile) => {
+        projectile.remove();
+      });
 
-      playAgainSection.style.display = "none";
-      score.textContent = currentScore;
+      // Remove any remaining images from the DOM
+      const images = document.querySelectorAll("#img-container img");
+      images.forEach((img) => {
+        img.remove();
+      });
 
-      window.imgIntervals.forEach((interval) => clearInterval(interval));
-      window.imgIntervals = [];
+      // Reset the score to zero
+      resetScore();
 
+      // Restart the game
       addImagesToPage("img-container", 15);
       moveImagesDown();
       animateBottomCircle();
+      bottomCircle();
     });
   } else {
     ("");
@@ -94,4 +107,10 @@ function clearAllIntervals() {
     window.imageIntervals.forEach((interval) => clearInterval(interval));
     window.imageIntervals = [];
   }
+}
+
+function resetScore() {
+  currentScore = 0;
+  const scoreElement = document.getElementById("score");
+  scoreElement.textContent = currentScore;
 }

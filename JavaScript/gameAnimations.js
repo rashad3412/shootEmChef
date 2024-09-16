@@ -92,5 +92,3 @@ function bottomCircle() {
     }
   });
 }
-
-document.addEventListener("DOMContentLoaded", bottomCircle);
