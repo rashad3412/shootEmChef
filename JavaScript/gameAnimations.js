@@ -81,7 +81,7 @@ function bottomCircle() {
   const bottomCircle = document.getElementById("bottom-circle");
   document.addEventListener("keydown", (event) => {
     if (event.code === "Space" && gameisActive) {
-      // Ensure shooting is only possible when the game is active
+      event.preventDefault(); // Ensure shooting is only possible when the game is active
       if (bottomCircle) {
         shootImages(bottomCircle);
       } else {

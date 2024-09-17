@@ -56,7 +56,7 @@ function shootImages(fromElement) {
       clearInterval(interval);
       shootingProjectile.remove();
     }
-  }, 15);
+  }, 20);
 
   if (!window.imageIntervals) {
     window.imageIntervals = [];
@@ -70,6 +70,8 @@ function shootImages(fromElement) {
 function removeImageAndShotProjectile(img) {
   // Remove the image from the DOM
   img.parentNode.removeChild(img);
+  console.log(img.parentNode);
+  console.log(img);
 
   // Check if all images have been shot down
   if (document.querySelectorAll("#img-container img").length === 0) {

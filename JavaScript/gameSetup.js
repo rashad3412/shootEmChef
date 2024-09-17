@@ -4,28 +4,27 @@ let shouldAnimate = true;
 let gameisActive = false;
 
 function setUpGame() {
-  // start button of the game when it is clicked
   const startButton = document.getElementById("start-game-button");
   const gameContainer = document.getElementById("game-container");
 
+  function startGame() {
+    gameisActive = true; // Global variable indicating game is active
+
+    // Hide the start button and show the game container
+    startButton.parentElement.style.display = "none";
+    gameContainer.style.display = "block";
+
+    // Add images to the page and start animations
+    addImagesToPage("img-container", 18);
+    moveImagesDown();
+    bottomCircle();
+    animateBottomCircle();
+  }
+
+  // Wait for DOM content to be loaded before adding the event listener
   document.addEventListener("DOMContentLoaded", () => {
     if (startButton) {
-      startButton.addEventListener("click", function () {
-        gameisActive = true; // Global varible
-
-        startButton.parentElement.style.display = "none";
-        gameContainer.style.display = "block";
-
-        // adding Id from game.html as arg adding circles
-        addImagesToPage("img-container", 18);
-        moveImagesDown();
-        bottomCircle();
-        animateBottomCircle();
-
-        // Game animation func for circles to go down page.
-      });
-    } else {
-      ("");
+      startButton.addEventListener("click", startGame);
     }
   });
 }
@@ -49,46 +48,43 @@ function updateScore(increment) {
 const playAgain = document.getElementById("play-again-button");
 const playAgainSection = document.getElementById("play-again-button-section");
 
+function clearDOMElements(selector) {
+  const elements = document.querySelectorAll(selector);
+  elements.forEach((element) => {
+    element.remove();
+  });
+}
+
 function resetGame() {
-  // reset button for the game
+  // Reset game state variables
   gameOver = false;
+  playAgainShown = false;
+  gameisActive = true;
+  shouldAnimate = true;
 
-  if (playAgain) {
-    playAgain.addEventListener("click", () => {
-      playAgainShown = false;
-      gameisActive = true;
-      shouldAnimate = true;
+  // Hide the Play Again section
+  playAgainSection.style.display = "none";
 
-      // Hide the Play Again section
-      playAgainSection.style.display = "none";
+  // Clear all intervals related to game animations
+  clearAllIntervals();
 
-      // Clear all intervals related to images and projectiles
-      clearAllIntervals();
+  // Remove any remaining projectiles and images from the DOM
+  clearDOMElements(".shots");
+  clearDOMElements("#img-container img");
 
-      // Remove any remaining projectiles from the DOM
-      const projectiles = document.querySelectorAll(".shots");
-      projectiles.forEach((projectile) => {
-        projectile.remove();
-      });
+  // Reset the score to zero
+  resetScore();
 
-      // Remove any remaining images from the DOM
-      const images = document.querySelectorAll("#img-container img");
-      images.forEach((img) => {
-        img.remove();
-      });
+  // Restart the game
+  addImagesToPage("img-container", 18);
+  moveImagesDown();
+  animateBottomCircle();
+  bottomCircle();
+}
 
-      // Reset the score to zero
-      resetScore();
-
-      // Restart the game
-      addImagesToPage("img-container", 18);
-      moveImagesDown();
-      animateBottomCircle();
-      bottomCircle();
-    });
-  } else {
-    ("");
-  }
+// Attach event listener for the "Play Again" button
+if (playAgain) {
+  playAgain.addEventListener("click", resetGame);
 }
 
 setUpGame();
