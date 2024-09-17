@@ -42,27 +42,25 @@ window.imgIntervals = [];
 
 function moveImagesDown() {
   const imagesGoingDownScreen = document.querySelectorAll("#img-container img");
-  let playAgainShown = false;
-  let totalImages = imagesGoingDownScreen.length;
+  console.log(imagesGoingDownScreen);
 
   imagesGoingDownScreen.forEach((img, index) => {
     let position = 0;
-    const speed = Math.random() * 2 + 1;
+    const speed = Math.random() * 3 + 1;
 
     const interval = setInterval(() => {
       position += speed;
+
       img.style.transform = `translateY(${position}px)`;
 
       if (position >= window.innerHeight) {
+        // The image has reached the bottom of the screen
         clearInterval(interval);
         removeImageAndShotProjectile(img);
-
-        if (document.querySelectorAll("#img-container img").length === 0) {
-          stopGameAnimation();
-        }
+        stopGameAnimation(); // Stop the game because an image reached the bottom
       }
+      // No need to check for total images here
     }, 35);
-
     window.imgIntervals.push(interval);
   });
 }

@@ -51,6 +51,7 @@ const playAgainSection = document.getElementById("play-again-button-section");
 
 function resetGame() {
   // reset button for the game
+  gameOver = false;
 
   if (playAgain) {
     playAgain.addEventListener("click", () => {
@@ -80,7 +81,7 @@ function resetGame() {
       resetScore();
 
       // Restart the game
-      addImagesToPage("img-container", 15);
+      addImagesToPage("img-container", 18);
       moveImagesDown();
       animateBottomCircle();
       bottomCircle();
