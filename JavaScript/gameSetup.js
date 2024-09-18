@@ -1,4 +1,4 @@
-/* This is a helper function for the game Im using this to add circles dynamically to the dom in two different Javascript files. */
+/* This is a helper function for the game Im using this to add Images dynamically to the dom in different Javascript files. */
 
 let shouldAnimate = true;
 let gameisActive = false;
@@ -29,6 +29,8 @@ function setUpGame() {
   });
 }
 
+setUpGame();
+
 /////////////////////////////////////////////
 
 function updateScore(increment) {
@@ -48,7 +50,9 @@ function updateScore(increment) {
 const playAgain = document.getElementById("play-again-button");
 const playAgainSection = document.getElementById("play-again-button-section");
 
-function clearDOMElements(selector) {
+// function to clear the projectiles and images from the dom when the reorder button has appered on the screen.
+
+function clearProjectilesAndImages(selector) {
   const elements = document.querySelectorAll(selector);
   elements.forEach((element) => {
     element.remove();
@@ -69,8 +73,8 @@ function resetGame() {
   clearAllIntervals();
 
   // Remove any remaining projectiles and images from the DOM
-  clearDOMElements(".shots");
-  clearDOMElements("#img-container img");
+  clearProjectilesAndImages(".shots");
+  clearProjectilesAndImages("#img-container img");
 
   // Reset the score to zero
   resetScore();
@@ -87,9 +91,6 @@ if (playAgain) {
   playAgain.addEventListener("click", resetGame);
 }
 
-setUpGame();
-resetGame();
-
 ///////////////////////////////////
 // Function to clear all intervals including shooting and movement
 function clearAllIntervals() {
@@ -100,9 +101,9 @@ function clearAllIntervals() {
   }
 
   // Stop all shooting intervals
-  if (window.imageIntervals) {
-    window.imageIntervals.forEach((interval) => clearInterval(interval));
-    window.imageIntervals = [];
+  if (window.projectileIntervals) {
+    window.projectileIntervals.forEach((interval) => clearInterval(interval));
+    window.projectileIntervals = [];
   }
 }
 

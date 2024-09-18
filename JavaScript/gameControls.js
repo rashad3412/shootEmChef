@@ -6,10 +6,6 @@ Game Controls
 
 //  checking to see if the session for game.html has beem closed or refreshed on the page if the page is refreshed the window will redirect to the index.html file.
 
-if (!window.imageIntervals) {
-  window.imageIntervals = [];
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   if (!sessionStorage.getItem("navigated")) {
     window.location.href = "index.html";
@@ -17,6 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
   sessionStorage.removeItem("navigated");
 });
 
+if (!window.imageIntervals) {
+  window.imageIntervals = [];
+}
 // Game Functions
 
 function shootImages(fromElement) {
@@ -43,15 +42,6 @@ function shootImages(fromElement) {
     position += 4;
     shootingProjectile.style.bottom = `${position}px`;
 
-    document.querySelectorAll("#img-container img ").forEach((img) => {
-      if (checkCollision(shootingProjectile, img)) {
-        clearInterval(interval);
-        removeImageAndShotProjectile(shootingProjectile);
-        removeImageAndShotProjectile(img);
-        updateScore(1);
-      }
-    });
-
     if (position > window.innerHeight) {
       clearInterval(interval);
       shootingProjectile.remove();
@@ -63,15 +53,33 @@ function shootImages(fromElement) {
   }
 
   window.imageIntervals.push(interval);
+
+  document.querySelectorAll("#img-container img ").forEach((img) => {
+    if (checkCollision(shootingProjectile, img)) {
+      clearInterval(interval);
+      removeImageAndShotProjectile(shootingProjectile);
+      removeImageAndShotProjectile(img);
+      updateScore(1);
+    }
+  });
 }
 
 //////////////////////////////
 
 function removeImageAndShotProjectile(img) {
-  // Remove the image from the DOM
-  img.parentNode.removeChild(img);
-  console.log(img.parentNode);
-  console.log(img);
+  // Ensure the image exists and hasn't already been removed
+  if (img && img.parentNode && img.getAttribute("data-removed") !== "true") {
+    // Mark the image as removed to prevent future interaction
+    img.setAttribute("data-removed", "true");
+
+    // Remove the image from the DOM
+    img.parentNode.removeChild(img);
+  } else {
+    console.warn(
+      "Attempted to remove an image that no longer exists or is null:",
+      img
+    );
+  }
 
   // Check if all images have been shot down
   if (document.querySelectorAll("#img-container img").length === 0) {
