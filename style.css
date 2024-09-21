@@ -73,9 +73,9 @@ body::before {
 a {
   display: flex;
   justify-content: center;
-  position: absolute;
-  top: 70%;
-  left: 50%;
+  position: fixed;
+  top: 60%;
+  left: 40%;
   transform: translate(-50%, -50%);
   width: 200px;
   font-size: 1.8em;
@@ -97,6 +97,22 @@ a {
   text-decoration: none;
   text-shadow: 0 0 8px rgba(0, 0, 0, 0.2), 0 0 16px rgba(255, 255, 255, 0.6);
   filter: brightness(1.02);
+  cursor: pointer;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+a {
+  animation: blink 1.5s infinite; /* The button will blink every 1 second */
 }
 
 /* Dinamically Added circles to the page in JS and styled them below */

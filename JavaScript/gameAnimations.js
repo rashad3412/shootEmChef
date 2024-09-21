@@ -86,13 +86,13 @@ function stopGameAnimation() {
 }
 
 // Your bottomCircle function to prevent shooting after reset
-function bottomCircle() {
-  const bottomCircle = document.getElementById("bottom-circle");
+function ChefImage() {
+  const chefImage = document.getElementById("chefImg");
   document.addEventListener("keydown", (event) => {
     if (event.code === "Space" && gameisActive) {
       event.preventDefault(); // Ensure shooting is only possible when the game is active
-      if (bottomCircle) {
-        shootImages(bottomCircle);
+      if (chefImage) {
+        shootImages(chefImage);
       } else {
         console.error("bottom-circle element not found");
       }

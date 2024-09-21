@@ -6,16 +6,17 @@ Game Controls
 
 //  checking to see if the session for game.html has beem closed or refreshed on the page if the page is refreshed the window will redirect to the index.html file.
 
-document.addEventListener("DOMContentLoaded", () => {
-  if (!sessionStorage.getItem("navigated")) {
-    window.location.href = "index.html";
-  }
-  sessionStorage.removeItem("navigated");
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   if (!sessionStorage.getItem("navigated")) {
+//     window.location.href = "index.html";
+//   }
+//   sessionStorage.removeItem("navigated");
+// });
 
 if (!window.imageIntervals) {
   window.imageIntervals = [];
 }
+
 // Game Functions
 
 function shootImages(fromElement) {
@@ -23,6 +24,8 @@ function shootImages(fromElement) {
     console.error("shootCircle was called without a valid element.");
     return;
   }
+
+  /////////////////////////////////////////////////
 
   const shootingProjectile = document.createElement("div");
   shootingProjectile.classList.add("shots");
@@ -36,11 +39,22 @@ function shootImages(fromElement) {
   shootingProjectile.style.left = `${initialLeft}px`;
   shootingProjectile.style.bottom = `${bottom}px`;
 
+  /////////////////////////////////////////////////
+
   let position = parseInt(shootingProjectile.style.bottom, 10);
 
   const interval = setInterval(() => {
     position += 4;
     shootingProjectile.style.bottom = `${position}px`;
+
+    document.querySelectorAll("#img-container img ").forEach((img) => {
+      if (checkCollision(shootingProjectile, img)) {
+        clearInterval(interval);
+        removeImageAndShotProjectile(shootingProjectile);
+        removeImageAndShotProjectile(img);
+        updateScore(1);
+      }
+    });
 
     if (position > window.innerHeight) {
       clearInterval(interval);
@@ -53,15 +67,6 @@ function shootImages(fromElement) {
   }
 
   window.imageIntervals.push(interval);
-
-  document.querySelectorAll("#img-container img ").forEach((img) => {
-    if (checkCollision(shootingProjectile, img)) {
-      clearInterval(interval);
-      removeImageAndShotProjectile(shootingProjectile);
-      removeImageAndShotProjectile(img);
-      updateScore(1);
-    }
-  });
 }
 
 //////////////////////////////
@@ -88,43 +93,54 @@ function removeImageAndShotProjectile(img) {
 }
 
 ///////////////////////////////
+function animateChefMovements() {
+  const chefMovements = document.getElementById("chefImg");
 
-function animateBottomCircle() {
-  const bottomCircle = document.getElementById("bottom-circle");
-
-  if (!bottomCircle) {
-    console.error("bottom-circle element not found");
-    bottomCircle.style.animation = "sideToSide 2s ease-in-out infinite";
+  if (!chefMovements) {
+    console.error("chefImg element not found");
     return;
   }
 
-  //////////////////////////////
-
-  let positionX = bottomCircle.offsetLeft;
-  let moveRight = true;
-  const circleWidth = bottomCircle.offsetWidth;
-  const screenWidth = window.innerWidth;
+  let positionX = chefMovements.offsetLeft; // Starting position
+  let moveRight = true; // Direction of movement
+  const chefWidth = chefMovements.offsetWidth; // Width of the chef image
+  const screenWidth = window.innerWidth; // Screen width
 
   function updatePosition() {
     if (!shouldAnimate) {
-      bottomCircle.style.animation = "none";
       return;
     }
+
+    // Debugging logs to track movement
+    console.log(
+      "PositionX:",
+      positionX,
+      "ChefWidth:",
+      chefWidth,
+      "ScreenWidth:",
+      screenWidth
+    );
+
+    // Move the chef image based on the direction
     if (moveRight) {
-      positionX += 2;
-      if (positionX + circleWidth > screenWidth) {
-        moveRight = false;
+      positionX += 3; // Move to the right
+      if (positionX + chefWidth >= screenWidth) {
+        moveRight = false; // Switch to move left when hitting the right edge
       }
     } else {
-      positionX -= 2;
-      if (positionX < 0) {
-        moveRight = true;
+      positionX -= 3; // Move to the left
+      if (positionX <= 0) {
+        moveRight = true; // Switch to move right when hitting the left edge
       }
     }
 
-    bottomCircle.style.left = positionX + "px";
+    // Update the position of the chef image
+    chefMovements.style.left = `${positionX}px`;
+
+    // Continue the animation loop
     requestAnimationFrame(updatePosition);
   }
+
   // Start the animation loop
   requestAnimationFrame(updatePosition);
 }

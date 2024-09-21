@@ -17,8 +17,8 @@ function setUpGame() {
     // Add images to the page and start animations
     addImagesToPage("img-container", 18);
     moveImagesDown();
-    bottomCircle();
-    animateBottomCircle();
+    ChefImage();
+    animateChefMovements();
   }
 
   // Wait for DOM content to be loaded before adding the event listener
@@ -82,8 +82,8 @@ function resetGame() {
   // Restart the game
   addImagesToPage("img-container", 18);
   moveImagesDown();
-  animateBottomCircle();
-  bottomCircle();
+  animateChefMovements();
+  ChefImage();
 }
 
 // Attach event listener for the "Play Again" button
