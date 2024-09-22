@@ -133,26 +133,33 @@ body::before {
 #chefImg {
   position: absolute;
   bottom: 10px; /* Keep the chef at the bottom */
-  width: 125px;
-  height: 125px;
+  width: 105px;
+  height: 105px;
 }
 
 .shots {
   position: absolute;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: #fff;
-  border: 1px solid #e45838;
+  width: 60px; /* Adjust to fit the size of your pan image */
+  height: 60px;
+  background-image: url("assets/FoodPic/utensil-knife.png"); /* Path to your image */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+
+  /* Add animation for rotation */
+  animation: rotateShot 2s linear infinite;
 }
 
-@keyframes sideToSide {
-  0%,
-  100% {
-    transform: translateX(-50%) translateX(-10px);
+/* Define the keyframes for rotation */
+@keyframes rotateShot {
+  from {
+    transform: rotate(0deg);
   }
-  50% {
-    transform: translateX(-50%) translateX(10px);
+  to {
+    transform: rotate(360deg);
   }
 }
 

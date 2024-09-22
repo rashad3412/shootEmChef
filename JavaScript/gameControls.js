@@ -21,33 +21,31 @@ if (!window.imageIntervals) {
 
 function shootImages(fromElement) {
   if (!fromElement) {
-    console.error("shootCircle was called without a valid element.");
+    console.error("shootImages was called without a valid element.");
     return;
   }
-
-  /////////////////////////////////////////////////
 
   const shootingProjectile = document.createElement("div");
   shootingProjectile.classList.add("shots");
   document.body.appendChild(shootingProjectile);
 
   const rect = fromElement.getBoundingClientRect();
-  const initialLeft = rect.left + rect.width / 2 - 5;
-  const bottom = window.innerHeight - rect.top;
+  const initialLeft = rect.left + rect.width / 2 - 30; // Adjust if needed
+  const bottom = window.innerHeight - rect.bottom + 63; // Adjust for initial position
 
-  shootingProjectile.style.position = "absolute";
-  shootingProjectile.style.left = `${initialLeft}px`;
+  // Set the initial position of the projectile
+  shootingProjectile.style.left = `${initialLeft}px`; // No horizontal movement, just shoot straight
   shootingProjectile.style.bottom = `${bottom}px`;
-
-  /////////////////////////////////////////////////
 
   let position = parseInt(shootingProjectile.style.bottom, 10);
 
   const interval = setInterval(() => {
-    position += 4;
+    // Move the projectile straight upward
+    position += 4; // Adjust speed if needed
     shootingProjectile.style.bottom = `${position}px`;
 
-    document.querySelectorAll("#img-container img ").forEach((img) => {
+    // Check collision with images
+    document.querySelectorAll("#img-container img").forEach((img) => {
       if (checkCollision(shootingProjectile, img)) {
         clearInterval(interval);
         removeImageAndShotProjectile(shootingProjectile);
@@ -56,17 +54,17 @@ function shootImages(fromElement) {
       }
     });
 
+    // Remove projectile if it goes off the screen
     if (position > window.innerHeight) {
       clearInterval(interval);
       shootingProjectile.remove();
     }
   }, 20);
 
-  if (!window.imageIntervals) {
-    window.imageIntervals = [];
+  if (!window.projectileIntervals) {
+    window.projectileIntervals = [];
   }
-
-  window.imageIntervals.push(interval);
+  window.projectileIntervals.push(interval);
 }
 
 //////////////////////////////
@@ -110,16 +108,6 @@ function animateChefMovements() {
     if (!shouldAnimate) {
       return;
     }
-
-    // Debugging logs to track movement
-    console.log(
-      "PositionX:",
-      positionX,
-      "ChefWidth:",
-      chefWidth,
-      "ScreenWidth:",
-      screenWidth
-    );
 
     // Move the chef image based on the direction
     if (moveRight) {
