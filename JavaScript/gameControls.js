@@ -6,12 +6,12 @@ Game Controls
 
 //  checking to see if the session for game.html has beem closed or refreshed on the page if the page is refreshed the window will redirect to the index.html file.
 
-// document.addEventListener("DOMContentLoaded", () => {
-//   if (!sessionStorage.getItem("navigated")) {
-//     window.location.href = "index.html";
-//   }
-//   sessionStorage.removeItem("navigated");
-// });
+document.addEventListener("DOMContentLoaded", () => {
+  if (!sessionStorage.getItem("navigated")) {
+    window.location.href = "index.html";
+  }
+  sessionStorage.removeItem("navigated");
+});
 
 if (!window.imageIntervals) {
   window.imageIntervals = [];
@@ -31,7 +31,7 @@ function shootImages(fromElement) {
 
   const rect = fromElement.getBoundingClientRect();
   const initialLeft = rect.left + rect.width / 2 - 30; // Adjust if needed
-  const bottom = window.innerHeight - rect.bottom + 63; // Adjust for initial position
+  const bottom = window.innerHeight - rect.bottom + 83; // Adjust for initial position
 
   // Set the initial position of the projectile
   shootingProjectile.style.left = `${initialLeft}px`; // No horizontal movement, just shoot straight
@@ -65,6 +65,20 @@ function shootImages(fromElement) {
     window.projectileIntervals = [];
   }
   window.projectileIntervals.push(interval);
+}
+
+//////////////////////////////
+
+function checkCollision(img1, img2) {
+  const rect1 = img1.getBoundingClientRect();
+  const rect2 = img2.getBoundingClientRect();
+
+  return (
+    rect1.x < rect2.x + rect2.width &&
+    rect1.x + rect1.width > rect2.x &&
+    rect1.y < rect2.y + rect2.height &&
+    rect1.y + rect1.height > rect2.y
+  );
 }
 
 //////////////////////////////
@@ -131,18 +145,4 @@ function animateChefMovements() {
 
   // Start the animation loop
   requestAnimationFrame(updatePosition);
-}
-
-//////////////////////////////
-
-function checkCollision(img1, img2) {
-  const rect1 = img1.getBoundingClientRect();
-  const rect2 = img2.getBoundingClientRect();
-
-  return (
-    rect1.x < rect2.x + rect2.width &&
-    rect1.x + rect1.width > rect2.x &&
-    rect1.y < rect2.y + rect2.height &&
-    rect1.y + rect1.height > rect2.y
-  );
 }

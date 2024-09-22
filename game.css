@@ -120,6 +120,13 @@ body::before {
   width: 375px;
 }
 
+#chefImg {
+  position: absolute;
+  bottom: 10px;
+  width: 125px;
+  height: 125px;
+}
+
 .shots {
   width: 30px;
   height: 30px;
@@ -128,13 +135,6 @@ body::before {
   color: #187b91;
   margin: 2px;
   transition: transform 0.1s linear;
-}
-
-#chefImg {
-  position: absolute;
-  bottom: 10px; /* Keep the chef at the bottom */
-  width: 105px;
-  height: 105px;
 }
 
 .shots {
@@ -162,7 +162,6 @@ body::before {
     transform: rotate(360deg);
   }
 }
-
 #img-container {
   display: flex;
   flex-wrap: wrap;
