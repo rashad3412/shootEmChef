@@ -71,7 +71,7 @@ function resetGame() {
   animateChefMovements();
   ChefImage();
 
-  displayLevel(currentLevel);
+  showLevelMessage(currentLevel);
 }
 
 // Attach event listener for the "Play Again" button
@@ -117,11 +117,18 @@ function clearAllIntervals() {
   }
 }
 
+let gameWon = false;
+
 function stopGameAnimation() {
   gameisActive = false; // Global varible
   shouldAnimate = false; // Global varible
 
-  playAgainSection.style.display = "flex";
+  if (!gameWon) {
+    playAgainSection.style.display = "flex";
+  } else {
+    playAgainSection.style.display = "none";
+  }
+
   score.textContent = "0";
 
   window.imgIntervals.forEach((interval) => clearInterval(interval));

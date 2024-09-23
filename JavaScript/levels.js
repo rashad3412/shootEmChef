@@ -1,12 +1,6 @@
 let currentLevel = 1;
 let totalImages = 10;
-let maxLevel = 5;
-
-function updatedLevel() {
-  currentLevel++;
-  totalImages += 5;
-  resetGame();
-}
+let maxLevel = 2;
 
 // Function to check if all images are shot down and handle level completion
 function checkImagesAndLevel() {
@@ -21,16 +15,21 @@ function checkImagesAndLevel() {
 
 // Function to update the level and show a "Level Up" message
 function updatedLevel() {
-  currentLevel++;
-  totalImages += 5; // Increase total images for the next level
+  if (currentLevel >= maxLevel) {
+    winGame();
+    stopGameAnimation();
+  } else {
+    currentLevel++;
+    totalImages += 5; // Increase total images for the next level
 
-  // Show level-up message
-  showLevelMessage(currentLevel);
+    // Show level-up message
+    showLevelMessage(currentLevel);
 
-  // Start the new level without resetting the entire game
-  setTimeout(() => {
-    loadNextLevel();
-  }, 2000); // Give a short delay to show the level message before starting the next level
+    // Start the new level without resetting the entire game
+    setTimeout(() => {
+      loadNextLevel();
+    }, 2000); // Give a short delay to show the level message before starting the next level
+  }
 }
 
 // Function to show the level-up message
@@ -58,4 +57,13 @@ function loadNextLevel() {
   // Ensure the chef movements and shooting are re-enabled
   animateChefMovements();
   ChefImage();
+}
+
+function winGame() {
+  gameWon = true;
+  const winMessage = document.createElement("div");
+  winMessage.classList.add("win-message");
+  winMessage.textContent = `You WIN!`;
+  document.body.appendChild(winMessage);
+  console.log(winMessage);
 }
