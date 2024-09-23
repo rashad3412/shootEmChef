@@ -100,7 +100,11 @@ function removeImageAndShotProjectile(img) {
 
   // Check if all images have been shot down
   if (document.querySelectorAll("#img-container img").length === 0) {
-    stopGameAnimation(); // Stop the game because all images have been shot down
+    if (gameisActive) {
+      updatedLevel();
+    } else {
+      stopGameAnimation();
+    }
   }
 }
 

@@ -180,3 +180,34 @@ img.game-image {
   object-fit: cover;
   filter: contrast(165%);
 }
+
+.level-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 25%;
+  font-family: "Margarine", sans-serif;
+  width: 400px;
+  height: 200px;
+  border: none;
+  font-size: 3em;
+  font-family: "Margarine", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-align: center;
+
+  background: linear-gradient(
+    90deg,
+    #ff6b6b,
+    #f1c40f,
+    #1abc9c
+  ); /* Gradient background */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.2), 0 0 16px rgba(255, 255, 255, 0.6);
+  filter: brightness(1.3);
+}

@@ -46,7 +46,7 @@ function moveImagesDown() {
 
   imagesGoingDownScreen.forEach((img, index) => {
     let position = 0;
-    const speed = Math.random() * 3 + 1;
+    const speed = Math.random() * (3 + currentLevel * 1);
 
     const interval = setInterval(() => {
       // Check if the game is still active and image hasn't been removed
@@ -72,17 +72,6 @@ function moveImagesDown() {
     }, 35);
     window.imgIntervals.push(interval);
   });
-}
-
-function stopGameAnimation() {
-  gameisActive = false; // Global varible
-  shouldAnimate = false; // Global varible
-
-  playAgainSection.style.display = "flex";
-  score.textContent = "0";
-
-  window.imgIntervals.forEach((interval) => clearInterval(interval));
-  window.imgIntervals = [];
 }
 
 // Your bottomCircle function to prevent shooting after reset

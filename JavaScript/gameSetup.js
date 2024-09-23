@@ -15,7 +15,7 @@ function setUpGame() {
     gameContainer.style.display = "block";
 
     // Add images to the page and start animations
-    addImagesToPage("img-container", 18);
+    addImagesToPage("img-container", totalImages);
     moveImagesDown();
     ChefImage();
     animateChefMovements();
@@ -33,20 +33,6 @@ setUpGame();
 
 /////////////////////////////////////////////
 
-function updateScore(increment) {
-  const scoreElement = document.getElementById("score");
-
-  // Ensure currentScore is defined before incrementing
-  if (typeof currentScore === "undefined") {
-    currentScore = 0;
-  }
-
-  currentScore += increment;
-  scoreElement.textContent = currentScore;
-}
-
-///////////////////////////////
-
 const playAgain = document.getElementById("play-again-button");
 const playAgainSection = document.getElementById("play-again-button-section");
 
@@ -61,7 +47,7 @@ function clearProjectilesAndImages(selector) {
 
 function resetGame() {
   // Reset game state variables
-  gameOver = false;
+  // gameOver = false;
   playAgainShown = false;
   gameisActive = true;
   shouldAnimate = true;
@@ -80,10 +66,12 @@ function resetGame() {
   resetScore();
 
   // Restart the game
-  addImagesToPage("img-container", 18);
+  addImagesToPage("img-container", totalImages);
   moveImagesDown();
   animateChefMovements();
   ChefImage();
+
+  displayLevel(currentLevel);
 }
 
 // Attach event listener for the "Play Again" button
@@ -91,7 +79,29 @@ if (playAgain) {
   playAgain.addEventListener("click", resetGame);
 }
 
+/////////////////////////////////////////////
+
+function updateScore(increment) {
+  const scoreElement = document.getElementById("score");
+
+  // Ensure currentScore is defined before incrementing
+  if (typeof currentScore === "undefined") {
+    currentScore = 0;
+  }
+
+  currentScore += increment;
+  scoreElement.textContent = currentScore;
+}
+
+// Reset Score
+function resetScore() {
+  currentScore = 0;
+  const scoreElement = document.getElementById("score");
+  scoreElement.textContent = currentScore;
+}
+
 ///////////////////////////////////
+
 // Function to clear all intervals including shooting and movement
 function clearAllIntervals() {
   // Stop all image intervals
@@ -107,8 +117,13 @@ function clearAllIntervals() {
   }
 }
 
-function resetScore() {
-  currentScore = 0;
-  const scoreElement = document.getElementById("score");
-  scoreElement.textContent = currentScore;
+function stopGameAnimation() {
+  gameisActive = false; // Global varible
+  shouldAnimate = false; // Global varible
+
+  playAgainSection.style.display = "flex";
+  score.textContent = "0";
+
+  window.imgIntervals.forEach((interval) => clearInterval(interval));
+  window.imgIntervals = [];
 }
