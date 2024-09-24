@@ -46,7 +46,8 @@ function moveImagesDown() {
 
   imagesGoingDownScreen.forEach((img, index) => {
     let position = 0;
-    const speed = Math.random() * (3 + currentLevel * 1);
+    const minSpeed = 0.5;
+    const speed = Math.random() * (3 + currentLevel * 1.4) + minSpeed;
 
     const interval = setInterval(() => {
       // Check if the game is still active and image hasn't been removed
@@ -60,6 +61,7 @@ function moveImagesDown() {
 
           // Ensure the image is handled only once
           if (img.getAttribute("data-removed") !== "true") {
+            img.setAttribute("data-removed", true);
             console.log("Image hit the bottom:", img);
             removeImageAndShotProjectile(img); // Safely remove the image
             stopGameAnimation();

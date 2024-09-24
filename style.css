@@ -25,8 +25,16 @@ body::before {
   background-position: center;
   opacity: 0.3; /* Adjust this value to change the opacity */
   z-index: -1;
+  animation: slowPan 35s linear infinite;
 }
-
+@keyframes slowPan {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
 /* Game Title Styling on first page */
 .title {
   font-family: "Margarine", sans-serif;

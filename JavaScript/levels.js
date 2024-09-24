@@ -1,6 +1,6 @@
 let currentLevel = 1;
 let totalImages = 10;
-let maxLevel = 2;
+let maxLevel = 5;
 
 // Function to check if all images are shot down and handle level completion
 function checkImagesAndLevel() {
@@ -36,7 +36,7 @@ function updatedLevel() {
 function showLevelMessage(level) {
   const levelMessage = document.createElement("div");
   levelMessage.classList.add("level-message");
-  levelMessage.textContent = `Level ${level}`;
+  levelMessage.textContent = `Order ${level}`;
   document.body.appendChild(levelMessage);
 
   // Remove the message after a few seconds
@@ -63,7 +63,7 @@ function winGame() {
   gameWon = true;
   const winMessage = document.createElement("div");
   winMessage.classList.add("win-message");
-  winMessage.textContent = `You WIN!`;
+  winMessage.textContent = `COOKED EM!`;
   document.body.appendChild(winMessage);
   console.log(winMessage);
 }

@@ -48,6 +48,8 @@ function clearProjectilesAndImages(selector) {
 function resetGame() {
   // Reset game state variables
   // gameOver = false;
+  currentLevel = 1;
+  totalImages = 10;
   playAgainShown = false;
   gameisActive = true;
   shouldAnimate = true;
