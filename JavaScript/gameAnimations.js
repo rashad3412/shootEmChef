@@ -46,14 +46,16 @@ function moveImagesDown() {
 
   imagesGoingDownScreen.forEach((img, index) => {
     let position = 0;
-    const minSpeed = 0.5;
+    const minSpeed = 0.4;
     const speed = Math.random() * (3 + currentLevel * 1.4) + minSpeed;
+    let scale = 1; // Initial scale factor
 
     const interval = setInterval(() => {
       // Check if the game is still active and image hasn't been removed
       if (!img.getAttribute("data-removed")) {
         position += speed;
-        img.style.transform = `translateY(${position}px)`;
+        scale += 0.007;
+        img.style.transform = `translateY(${position}px) scale(${scale})`;
 
         // If the image reaches the bottom of the screen
         if (position >= window.innerHeight - img.height) {
@@ -63,7 +65,7 @@ function moveImagesDown() {
           if (img.getAttribute("data-removed") !== "true") {
             img.setAttribute("data-removed", true);
             console.log("Image hit the bottom:", img);
-            removeImageAndShotProjectile(img); // Safely remove the image
+            removeImageAndShotProjectile(img); // Safely remove the image]
             stopGameAnimation();
           }
         }
@@ -71,7 +73,7 @@ function moveImagesDown() {
         // Image has been removed, clear the interval
         clearInterval(interval);
       }
-    }, 35);
+    }, 30);
     window.imgIntervals.push(interval);
   });
 }
