@@ -272,6 +272,18 @@ img.game-image {
   }
 }
 
+.button-container {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 125vh;
+}
+
+.button-container-info {
+  text-align: center;
+  margin: 0 auto;
+}
+
 /* .win-message,
 .play-again {
   font-family: "Margarine", sans-serif;
