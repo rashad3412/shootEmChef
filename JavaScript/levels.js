@@ -43,6 +43,7 @@ function showLevelMessage(level) {
   const levelMessage = document.createElement("div");
   levelMessage.classList.add("level-message");
   levelMessage.textContent = `Order ${level}`;
+  levelMessage.style.fontFamily = "cursive";
   document.body.appendChild(levelMessage);
 
   // Remove the message after a few seconds
@@ -69,7 +70,7 @@ function winGame() {
   gameWon = true;
   const winMessage = document.createElement("div");
   winMessage.classList.add("win-message");
-  winMessage.textContent = `COOKED EM!`;
+  winMessage.textContent = `You Cooked Em Chef!`;
   document.body.appendChild(winMessage);
 
   const buttonContainer = document.querySelector(".button-container");

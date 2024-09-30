@@ -46,7 +46,7 @@ body::before {
 }
 
 #start-game-button {
-  font-family: "Margarine", sans-serif;
+  font-family: cursive;
   width: 400px;
   height: 200px;
   border: none;
@@ -226,13 +226,13 @@ img.game-image {
   position: fixed;
   top: 45%;
   left: 50%;
+  width: 230px;
   transform: translate(-50%, -50%);
   font-size: 1.5em;
   font-family: cursive;
   color: white;
-  background: linear-gradient(90deg, #ff6b6b, #f1c40f, #1abc9c);
+  background: linear-gradient(90deg, #ff6b6b, #f1c40f);
   padding: 15px 10px;
-
   border-radius: 15px;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -279,12 +279,23 @@ img.game-image {
 }
 
 .button-container-info {
-  font-family: "Margarine", sans-serif;
+  font-size: 25px;
+  font-family: cursive;
   text-align: center;
   margin: 0 auto;
-
-  font-family: "Margarine", sans-serif;
+  color: #f0d259;
   font-weight: 700;
+}
+.button-container-info button {
+  font-family: cursive;
+  background-color: #ff6b6b;
+  color: #ffeeee;
+  font-size: 20px;
+  width: 75px;
+  height: 30px;
+  border-radius: 10px;
+  border: #f0d259 2px solid;
+  margin-top: 10px;
 }
 
 /* .win-message,

@@ -37,7 +37,7 @@ body::before {
 }
 /* Game Title Styling on first page */
 .title {
-  font-family: "Margarine", sans-serif;
+  font-family: cursive;
   font-weight: 700;
   letter-spacing: 0.5em;
   text-align: center;
@@ -89,7 +89,7 @@ a {
   font-size: 1.8em;
   border-radius: 5px;
   letter-spacing: 0.2em;
-  font-family: "Margarine", sans-serif;
+  font-family: cursive;
   font-weight: 500;
   background: linear-gradient(
     90deg,
