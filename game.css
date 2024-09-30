@@ -51,7 +51,6 @@ body::before {
   height: 200px;
   border: none;
   font-size: 3em;
-  font-family: "Margarine", sans-serif;
   font-weight: 700;
   letter-spacing: 0.5em;
   text-align: center;
@@ -276,12 +275,16 @@ img.game-image {
   display: none;
   justify-content: center;
   align-items: center;
-  height: 125vh;
+  height: 145vh;
 }
 
 .button-container-info {
+  font-family: "Margarine", sans-serif;
   text-align: center;
   margin: 0 auto;
+
+  font-family: "Margarine", sans-serif;
+  font-weight: 700;
 }
 
 /* .win-message,

@@ -100,6 +100,6 @@ function winGame() {
 
   // Attach event listener for no button to handle "No" action
   newNoButton.addEventListener("click", () => {
-    console.log("No button clicked.");
+    window.location.href = "index.html";
   });
 }

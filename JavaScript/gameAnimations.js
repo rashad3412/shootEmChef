@@ -46,7 +46,7 @@ function moveImagesDown() {
 
   imagesGoingDownScreen.forEach((img, index) => {
     let position = 0;
-    const minSpeed = 0.4;
+    const minSpeed = 0.3;
     const speed = Math.random() * (3 + currentLevel * 1.4) + minSpeed;
     let scale = 1; // Initial scale factor
 
@@ -54,7 +54,7 @@ function moveImagesDown() {
       // Check if the game is still active and image hasn't been removed
       if (!img.getAttribute("data-removed")) {
         position += speed;
-        scale += 0.007;
+        scale += 0.0028;
         img.style.transform = `translateY(${position}px) scale(${scale})`;
 
         // If the image reaches the bottom of the screen

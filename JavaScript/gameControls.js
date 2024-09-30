@@ -131,12 +131,12 @@ function animateChefMovements() {
 
     // Move the chef image based on the direction
     if (moveRight) {
-      positionX += 4.5; // Move to the right
+      positionX += 5.5; // Move to the right
       if (positionX + chefWidth >= screenWidth) {
         moveRight = false; // Switch to move left when hitting the right edge
       }
     } else {
-      positionX -= 4.5; // Move to the left
+      positionX -= 5.5; // Move to the left
       if (positionX <= 0) {
         moveRight = true; // Switch to move right when hitting the left edge
       }
