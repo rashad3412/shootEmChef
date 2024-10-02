@@ -50,7 +50,7 @@ function resetGame() {
   // gameOver = false;
   currentLevel = 1;
   totalImages = 10;
-  playAgainShown = false;
+  // playAgainShown = false;
   gameisActive = true;
   shouldAnimate = true;
 
@@ -122,17 +122,44 @@ function clearAllIntervals() {
 let gameWon = false;
 
 function stopGameAnimation() {
-  gameisActive = false; // Global varible
-  shouldAnimate = false; // Global varible
+  console.log("Game stopped");
 
+  // Set game status to inactive
+  gameisActive = false;
+  shouldAnimate = false;
+
+  // Check if the game has been won or not
   if (!gameWon) {
-    playAgainSection.style.display = "flex";
+    // Show the Play Again button if the game wasn't won
+    const playAgainSection = document.getElementById(
+      "play-again-button-section"
+    );
+    if (playAgainSection) {
+      playAgainSection.style.display = "flex";
+      console.log("Displaying 'Play Again' button.");
+    } else {
+      console.error("Play Again section not found!");
+    }
   } else {
-    playAgainSection.style.display = "none";
+    // Hide the Play Again button if the game was won
+    const playAgainSection = document.getElementById(
+      "play-again-button-section"
+    );
+    if (playAgainSection) {
+      playAgainSection.style.display = "none";
+      console.log("Hiding 'Play Again' button because game is won.");
+    }
   }
 
-  score.textContent = "0";
+  // Reset the score display to zero
+  const score = document.getElementById("score");
+  if (score) {
+    score.textContent = "0";
+  }
 
+  // Clear any ongoing image intervals
   window.imgIntervals.forEach((interval) => clearInterval(interval));
   window.imgIntervals = [];
+
+  console.log("All intervals cleared, game fully stopped.");
 }
