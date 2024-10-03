@@ -1,6 +1,6 @@
 let currentLevel = 1;
 let totalImages = 10;
-let maxLevel = 1;
+let maxLevel = 5;
 
 // Function to check if all images are shot down and handle level completion
 function checkImagesAndLevel() {
@@ -8,7 +8,8 @@ function checkImagesAndLevel() {
     if (gameisActive) {
       updatedLevel();
     } else {
-      stopGameAnimation(); // Game resets when it ends
+      stopGameAnimation();
+      stopBackGroundMusic(); // Game resets when it ends
     }
   }
 }

@@ -41,7 +41,7 @@ function shootImages(fromElement) {
 
   const interval = setInterval(() => {
     // Move the projectile straight upward
-    position += 4; // Adjust speed if needed
+    position += 2.5; // Adjust speed if needed
     shootingProjectile.style.bottom = `${position}px`;
 
     // Check collision with images
@@ -100,7 +100,7 @@ function removeImageAndShotProjectile(img) {
 
   // Check if all images have been shot down
   if (document.querySelectorAll("#img-container img").length === 0) {
-    if (gameisActive) {
+    if (gameIsActive) {
       updatedLevel();
     } else {
       setTimeout(() => {

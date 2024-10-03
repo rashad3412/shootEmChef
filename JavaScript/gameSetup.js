@@ -1,14 +1,14 @@
 /* This is a helper function for the game Im using this to add Images dynamically to the dom in different Javascript files. */
 
 let shouldAnimate = true;
-let gameisActive = false;
+let gameIsActive = false;
 
 function setUpGame() {
   const startButton = document.getElementById("start-game-button");
   const gameContainer = document.getElementById("game-container");
 
   function startGame() {
-    gameisActive = true; // Global variable indicating game is active
+    gameIsActive = true; // Global variable indicating game is active
 
     // Hide the start button and show the game container
     startButton.parentElement.style.display = "none";
@@ -19,6 +19,7 @@ function setUpGame() {
     moveImagesDown();
     ChefImage();
     animateChefMovements();
+    playBackgroundMusic();
   }
 
   // Wait for DOM content to be loaded before adding the event listener
@@ -50,8 +51,8 @@ function resetGame() {
   // gameOver = false;
   currentLevel = 1;
   totalImages = 10;
-  // playAgainShown = false;
-  gameisActive = true;
+
+  gameIsActive = true;
   shouldAnimate = true;
 
   // Hide the Play Again section
@@ -72,7 +73,6 @@ function resetGame() {
   moveImagesDown();
   animateChefMovements();
   ChefImage();
-
   showLevelMessage(currentLevel);
 }
 
@@ -125,7 +125,7 @@ function stopGameAnimation() {
   console.log("Game stopped");
 
   // Set game status to inactive
-  gameisActive = false;
+  gameIsActive = false;
   shouldAnimate = false;
 
   // Check if the game has been won or not

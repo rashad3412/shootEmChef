@@ -46,7 +46,7 @@ function moveImagesDown() {
 
   imagesGoingDownScreen.forEach((img, index) => {
     let position = 0;
-    const minSpeed = 0.42;
+    const minSpeed = 0.8;
     const speed = Math.random() * (3 + currentLevel * 1.4) + minSpeed;
     let scale = 1; // Initial scale factor
 
@@ -54,7 +54,7 @@ function moveImagesDown() {
       // Check if the game is still active and image hasn't been removed
       if (!img.getAttribute("data-removed")) {
         position += speed;
-        scale += 0.003;
+        scale += 0.0035;
         img.style.transform = `translateY(${position}px) scale(${scale})`;
 
         // If the image reaches the bottom of the screen
@@ -81,7 +81,7 @@ function moveImagesDown() {
 function ChefImage() {
   const chefImage = document.getElementById("chefImg");
   document.addEventListener("keydown", (event) => {
-    if (event.code === "Space" && gameisActive) {
+    if (event.code === "Space" && gameIsActive) {
       event.preventDefault(); // Ensure shooting is only possible when the game is active
       if (chefImage) {
         shootImages(chefImage);
