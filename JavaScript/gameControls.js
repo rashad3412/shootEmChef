@@ -41,7 +41,7 @@ function shootImages(fromElement) {
 
   const interval = setInterval(() => {
     // Move the projectile straight upward
-    position += 2.5; // Adjust speed if needed
+    position += 4; // Adjust speed if needed
     shootingProjectile.style.bottom = `${position}px`;
 
     // Check collision with images
