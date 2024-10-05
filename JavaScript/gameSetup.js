@@ -163,24 +163,3 @@ function stopGameAnimation() {
 
   console.log("All intervals cleared, game fully stopped.");
 }
-
-function enterFullScreen() {
-  const body = document.body;
-  if (body.requestFullscreen) {
-    body.requestFullscreen();
-  } else if (body.mozRequestFullScreen) {
-    // Firefox
-    body.mozRequestFullScreen();
-  } else if (body.webkitRequestFullscreen) {
-    // Chrome, Safari, and Opera
-    body.webkitRequestFullscreen();
-  } else if (body.msRequestFullscreen) {
-    // IE/Edge
-    body.msRequestFullscreen();
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  // Call the function when the game starts
-  enterFullScreen();
-});
