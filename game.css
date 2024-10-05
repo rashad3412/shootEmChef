@@ -12,6 +12,7 @@ html body {
   margin: 0;
   background-color: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
   background-blend-mode: overlay;
+  touch-action: none;
   overflow: hidden;
 }
 
