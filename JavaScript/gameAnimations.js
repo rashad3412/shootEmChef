@@ -96,15 +96,13 @@ function ChefImage() {
     }
   });
 
-  // Touch shooting for mobile
   document.addEventListener("touchstart", (event) => {
+    event.preventDefault(); // Prevent zoom on touch
     if (gameIsActive && chefImage) {
-      event.preventDefault(); // Prevent default touch behavior
-      if (chefImage) {
-        shootImages(chefImage);
-      } else {
-        console.error("Chef Img not found");
-      }
+      shootImages(chefImage);
     }
+  });
+  document.addEventListener("touchmove", (event) => {
+    event.preventDefault(); // Prevent accidental movement while touching
   });
 }
