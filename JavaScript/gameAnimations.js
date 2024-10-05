@@ -98,7 +98,7 @@ function ChefImage() {
 
   // Touch shooting for mobile
   document.addEventListener("touchstart", (event) => {
-    if (gameIsActive) {
+    if (gameIsActive && chefImage) {
       event.preventDefault(); // Prevent default touch behavior
       if (chefImage) {
         shootImages(chefImage);
