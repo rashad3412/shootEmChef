@@ -6,22 +6,12 @@ Game Controls
 
 //  checking to see if the session for game.html has beem closed or refreshed on the page if the page is refreshed the window will redirect to the index.html file.
 
-// On the game page
 document.addEventListener("DOMContentLoaded", () => {
-  // Check if the user navigated from the intended page
   if (!sessionStorage.getItem("navigated")) {
-    window.location.href = "index.html"; // Redirect to index if they didn't navigate properly
+    window.location.href = "index.html";
   }
-
-  // Remove the flag so they can't access the game directly by refreshing
   sessionStorage.removeItem("navigated");
 });
-
-// Initialize the global window object for image intervals if not already initialized
-if (!window.imageIntervals) {
-  window.imageIntervals = [];
-}
-
 // Game Functions
 
 function shootImages(fromElement) {
