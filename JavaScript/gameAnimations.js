@@ -81,28 +81,27 @@ function moveImagesDown() {
   });
 }
 
-// Your bottomCircle function to prevent shooting after reset
 function ChefImage() {
-  const chefImage = document.getElementById("chefImg");
-  document.addEventListener("keydown", (event) => {
-    if (event.code === "Space" && gameIsActive) {
-      event.preventDefault(); // Ensure shooting is only possible when the game is active
-      if (chefImage) {
-        shootImages(chefImage);
-      } else {
-        console.error("bottom-circle element not found");
-      }
+  document.addEventListener("DOMContentLoaded", () => {
+    const chefImage = document.getElementById("chefImg");
+
+    if (!chefImage) {
+      console.error("chefImg element not found");
+      return;
     }
 
-    document.addEventListener("touchstart", (event) => {
-      if (gameIsActive) {
+    // Desktop shooting with spacebar
+    document.addEventListener("keydown", (event) => {
+      if (event.code === "Space" && gameIsActive) {
         event.preventDefault();
-      }
-      if (chefImage) {
         shootImages(chefImage);
-      } else {
-        console.error("Chef Img Not Found");
       }
+    });
+
+    // Mobile shooting with touch
+    chefImage.addEventListener("touchstart", (event) => {
+      event.preventDefault();
+      shootImages(chefImage);
     });
   });
 }
