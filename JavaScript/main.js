@@ -2,8 +2,14 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   const newGameLink = document.querySelector('a[href="game.html"]');
+
   if (newGameLink) {
+    // Handle both click and touch events for mobile
     newGameLink.addEventListener("click", function (event) {
+      sessionStorage.setItem("navigated", "true");
+    });
+
+    newGameLink.addEventListener("touchstart", function (event) {
       sessionStorage.setItem("navigated", "true");
     });
   }
