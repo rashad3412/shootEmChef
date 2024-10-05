@@ -1,0 +1,24 @@
+@media (min-width: 768px) {
+  .game-title {
+    margin: 0 auto;
+  }
+  .game-title img {
+    position: absolute;
+    left: -70px;
+    top: 2px;
+  }
+
+  section a {
+    top: 63%;
+  }
+
+  .level-message {
+    font-size: 70px;
+    margin: 0 auto;
+  }
+
+  #game-container {
+    margin: 0 auto;
+    width: 525px;
+  }
+}

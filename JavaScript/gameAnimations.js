@@ -93,5 +93,16 @@ function ChefImage() {
         console.error("bottom-circle element not found");
       }
     }
+
+    document.addEventListener("touchstart", (event) => {
+      if (gameIsActive) {
+        event.preventDefault();
+      }
+      if (chefImage) {
+        shootImages(chefImage);
+      } else {
+        console.error("Chef Img Not Found");
+      }
+    });
   });
 }

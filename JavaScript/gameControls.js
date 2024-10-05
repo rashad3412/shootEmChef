@@ -113,16 +113,18 @@ function removeImageAndShotProjectile(img) {
 ///////////////////////////////
 function animateChefMovements() {
   const chefMovements = document.getElementById("chefImg");
+  const gameContainer = document.getElementById("game-container");
 
-  if (!chefMovements) {
-    console.error("chefImg element not found");
+  if (!chefMovements || !gameContainer) {
+    console.error("chefImg or game-container element not found");
     return;
   }
 
   let positionX = chefMovements.offsetLeft; // Starting position
   let moveRight = true; // Direction of movement
   const chefWidth = chefMovements.offsetWidth; // Width of the chef image
-  const screenWidth = window.innerWidth; // Screen width
+  const containerWidth = gameContainer.offsetWidth; // Screen width
+  const containerLeft = gameContainer.offsetLeft;
 
   function updatePosition() {
     if (!shouldAnimate) {
@@ -131,13 +133,13 @@ function animateChefMovements() {
 
     // Move the chef image based on the direction
     if (moveRight) {
-      positionX += 5.5; // Move to the right
-      if (positionX + chefWidth >= screenWidth) {
+      positionX += 6.5; // Move to the right
+      if (positionX + chefWidth >= containerLeft + containerWidth) {
         moveRight = false; // Switch to move left when hitting the right edge
       }
     } else {
-      positionX -= 5.5; // Move to the left
-      if (positionX <= 0) {
+      positionX -= 6.5; // Move to the left
+      if (positionX <= containerLeft) {
         moveRight = true; // Switch to move right when hitting the left edge
       }
     }
