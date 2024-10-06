@@ -38,7 +38,7 @@ body::before {
   background-position: center;
   opacity: 0.3; /* Adjust this value to change the opacity */
   z-index: -1;
-  animation: slowPan 35s linear infinite;
+  animation: slowPan 45s linear infinite;
 }
 @keyframes slowPan {
   0% {
