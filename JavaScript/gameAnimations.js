@@ -102,11 +102,16 @@ function ChefImage() {
   document.addEventListener(
     "touchstart",
     (event) => {
-      event.preventDefault(); // Prevent default touch actions (including zoom)
+      const target = event.target;
 
-      // Only shoot when the game is active and it's a single touch (no multi-touch)
-      if (gameIsActive && event.touches.length === 1) {
-        shootImages(chefImage);
+      // Exclude buttons and specific UI elements from preventDefault
+      if (target.tagName.toLowerCase() !== "button" && gameIsActive) {
+        event.preventDefault(); // Prevent default touch actions (including zoom)
+
+        // Only shoot when it's a single touch (no multi-touch)
+        if (event.touches.length === 1) {
+          shootImages(chefImage);
+        }
       }
     },
     { passive: false }
@@ -116,7 +121,12 @@ function ChefImage() {
   document.addEventListener(
     "touchmove",
     (event) => {
-      event.preventDefault(); // Prevent dragging or accidental screen movements
+      const target = event.target;
+
+      // Exclude buttons and specific UI elements from preventDefault
+      if (target.tagName.toLowerCase() !== "button") {
+        event.preventDefault(); // Prevent dragging or accidental screen movements
+      }
     },
     { passive: false }
   );
@@ -124,7 +134,12 @@ function ChefImage() {
   document.addEventListener(
     "touchend",
     (event) => {
-      event.preventDefault(); // Prevent any default actions after touch ends
+      const target = event.target;
+
+      // Exclude buttons and specific UI elements from preventDefault
+      if (target.tagName.toLowerCase() !== "button") {
+        event.preventDefault(); // Prevent any default actions after touch ends
+      }
     },
     { passive: false }
   );

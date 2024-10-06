@@ -26,7 +26,7 @@ function shootImages(fromElement) {
 
   const rect = fromElement.getBoundingClientRect();
   const initialLeft = rect.left + rect.width / 2 - 30; // Adjust if needed
-  const bottom = window.innerHeight - rect.bottom + 225; // Adjust for initial position
+  const bottom = window.innerHeight - rect.bottom + 185; // Adjust for initial position
 
   // Set the initial position of the projectile
   shootingProjectile.style.left = `${initialLeft}px`; // No horizontal movement, just shoot straight
