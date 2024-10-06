@@ -84,41 +84,61 @@ function moveImagesDown() {
 function ChefImage() {
   const chefImage = document.getElementById("chefImg");
 
-  // Spacebar shooting for desktop
+  // Check if chefImage is available
+  if (!chefImage) {
+    console.error("Chef image not found!");
+    return;
+  }
+
+  // Handle shooting with Spacebar for desktop
   document.addEventListener("keydown", (event) => {
     if (event.code === "Space" && gameIsActive) {
-      event.preventDefault(); // Ensure shooting is only possible when the game is active
-      if (chefImage) {
-        shootImages(chefImage);
-      } else {
-        console.error("Chef Img not found");
-      }
+      event.preventDefault(); // Prevent default spacebar behavior
+      shootImages(chefImage); // Trigger shooting
     }
   });
 
-  document.addEventListener("touchstart", (event) => {
-    event.preventDefault(); // Prevent zoom on touch
-    if (gameIsActive && chefImage) {
-      shootImages(chefImage);
-    }
-  });
+  // Handle touch shooting for mobile
   document.addEventListener(
     "touchstart",
     (event) => {
-      if (e.touches.length > 1) {
-        event.preventDefault(); // Prevent accidental movement while touching
+      event.preventDefault(); // Prevent default touch actions (including zoom)
+
+      // Only shoot when the game is active and it's a single touch (no multi-touch)
+      if (gameIsActive && event.touches.length === 1) {
+        shootImages(chefImage);
       }
     },
     { passive: false }
   );
 
+  // Prevent accidental zoom from multi-touch or gestures
+  document.addEventListener(
+    "touchmove",
+    (event) => {
+      event.preventDefault(); // Prevent dragging or accidental screen movements
+    },
+    { passive: false }
+  );
+
+  document.addEventListener(
+    "touchend",
+    (event) => {
+      event.preventDefault(); // Prevent any default actions after touch ends
+    },
+    { passive: false }
+  );
+
+  // Disable zooming with gestures (e.g., pinch to zoom)
   document.addEventListener("gesturestart", function (e) {
-    e.preventDefault();
+    e.preventDefault(); // Disable pinch-zoom
   });
+
   document.addEventListener("gesturechange", function (e) {
-    e.preventDefault();
+    e.preventDefault(); // Prevent any zoom gesture changes
   });
+
   document.addEventListener("gestureend", function (e) {
-    e.preventDefault();
+    e.preventDefault(); // Block zoom after gesture ends
   });
 }
