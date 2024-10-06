@@ -102,9 +102,15 @@ function ChefImage() {
       shootImages(chefImage);
     }
   });
-  document.addEventListener("touchmove", (event) => {
-    event.preventDefault(); // Prevent accidental movement while touching
-  });
+  document.addEventListener(
+    "touchstart",
+    (event) => {
+      if (e.touches.length > 1) {
+        event.preventDefault(); // Prevent accidental movement while touching
+      }
+    },
+    { passive: false }
+  );
 }
 
 document.addEventListener("gesturestart", function (e) {
