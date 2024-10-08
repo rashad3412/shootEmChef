@@ -46,6 +46,28 @@ The game is designed to work on:
 To run the game locally or contribute to the project, follow these steps:
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/your-username/cook-em-chef.git
    ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd cook-em-chef
+   ```
+
+3. ## 🌟 **Future Improvements**
+
+- Add sound effects and background music.
+- Implement more levels with varying difficulties.
+- Add more food types and projectiles.
+- Provide a leaderboard to track high scores.
+
+## 🤝 **Contributing**
+
+- Contributions are welcome! Please feel free to submit a pull request or create an issue to suggest improvements or report bugs.
+
+## 📝 **License**
+
+This project is licensed under the MIT License.
