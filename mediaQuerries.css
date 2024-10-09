@@ -1,11 +1,6 @@
 @media (min-width: 768px) {
   body {
-    height: 50vh;
     background-color: #767676;
-  }
-
-  #game-container {
-    margin: 0 auto;
   }
 
   .game-title {
