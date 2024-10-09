@@ -4,6 +4,7 @@
   }
 
   .game-title {
+    top: 10px;
     margin: 0 auto;
   }
   .game-title img {
@@ -23,8 +24,7 @@
   }
 
   #game-container {
-    position: relative;
     margin: 0 auto;
-    width: 525px;
+    width: 500px;
   }
 }
