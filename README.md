@@ -46,8 +46,7 @@ The objective of **Cook Em Chef** is to shoot falling food items from the top of
 
 The game is designed to work on:
 
-- Any modern **mobile device** with touch screen capabilities.
-- **Desktop browsers**, using keyboard controls for shooting.
+- Any modern **mobile device** or **tablet** with touch screen capabilities.
 - An **internet connection** is required to load the game.
 
 ## 📂 **Project Setup**

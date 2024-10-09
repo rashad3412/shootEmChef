@@ -1,9 +1,11 @@
 @media (min-width: 768px) {
   body {
-    overflow-y: hidden;
-    overscroll-behavior: none;
+    height: 50vh;
+    background-color: #767676;
+  }
+
+  #game-container {
     margin: 0 auto;
-    background-color: #6c6c6c;
   }
 
   .game-title {
@@ -26,6 +28,7 @@
   }
 
   #game-container {
+    position: relative;
     margin: 0 auto;
     width: 525px;
   }
